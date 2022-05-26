@@ -1,0 +1,10 @@
+.header {
+    grid-area: header;
+    background-color: pink;
+}
+
+.header img {
+    width: 60px;
+    border: solid white 2px;
+    border-radius: 60%;
+}
