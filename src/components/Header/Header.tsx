@@ -1,9 +1,10 @@
 import React from 'react';
-const Logo = require('../components/img/logoS.jpg');
+import s from './Header.module.css';
+const Logo = require('../img/logoS.jpg');
 
 export const Header = () => {
     return (
-        <div className={'header'}>
+        <div className={s.header}>
             <img src={Logo} alt='logo'/>
         </div>
     );
