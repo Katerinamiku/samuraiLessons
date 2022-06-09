@@ -2,7 +2,9 @@ import React from 'react';
 import s from './Post.module.css'
 
 const UserAvatar = require('./testimonial-2.jpg');
+
 type MessageType = {
+    id: number
     message: string
     likes: number
 }
