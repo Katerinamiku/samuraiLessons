@@ -5,3 +5,11 @@
     margin-top: 10px;
     color: white;
 }
+
+.error {
+    border: red 1px solid;
+}
+
+.errorMessage {
+    color: red;
+}

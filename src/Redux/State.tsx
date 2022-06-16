@@ -1,14 +1,17 @@
+import {v1} from "uuid";
+import {renderTree} from "../render";
+
 export type PostType = {
-    id: number
+    id: string
     message: string
     likes: number
 }
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
 
@@ -28,26 +31,37 @@ export type RootStateType = {
 export let state: RootStateType = {
     profilePage: {
         posts: [
-            {id: 1, message: 'Hi, how are you', likes: 12},
-            {id: 2, message: 'Its my first post', likes: 11},
-            {id: 2, message: 'blabla', likes: 11},
-            {id: 2, message: 'bebebe', likes: 11},
+            {id: v1(), message: 'Hi, how are you', likes: 12},
+            {id: v1(), message: 'Its my first post', likes: 11},
+            {id: v1(), message: 'blabla', likes: 11},
+            {id: v1(), message: 'bebebe', likes: 11},
         ]
     },
     messagesPage: {
         dialogs: [
-            {id: 1, name: 'Dima'},
-            {id: 2, name: 'Igor'},
-            {id: 3, name: 'Sveta'},
-            {id: 4, name: 'Valera'},
-            {id: 5, name: 'Andrew'},
+            {id: v1(), name: 'Dima'},
+            {id: v1(), name: 'Igor'},
+            {id: v1(), name: 'Sveta'},
+            {id: v1(), name: 'Valera'},
+            {id: v1(), name: 'Andrew'},
         ],
         messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'are'},
-            {id: 3, message: 'fine'},
-            {id: 4, message: 'Yo'},
+            {id: v1(), message: 'Hi'},
+            {id: v1(), message: 'are'},
+            {id: v1(), message: 'fine'},
+            {id: v1(), message: 'Yo'},
         ],
     },
+}
 
+export const addPost = (postText: string) => {
+    const newPost: PostType = {id: v1(), message: postText, likes: 0};
+   state.profilePage.posts.push(newPost);
+   renderTree(state)
+} //функция которая изменяет стейт должна быть там где сам стейт
+
+export const addMessage = (messageText: string) => {
+  const newMessage: MessageType = {id: v1(), message: messageText}
+    state.messagesPage.messages.push(newMessage);
+    renderTree(state)
 }

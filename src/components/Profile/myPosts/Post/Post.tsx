@@ -4,7 +4,7 @@ import s from './Post.module.css'
 const UserAvatar = require('./testimonial-2.jpg');
 
 type MessageType = {
-    id: number
+    id: string
     message: string
     likes: number
 }
