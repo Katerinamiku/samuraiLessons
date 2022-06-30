@@ -2,12 +2,12 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import {MessagesPageType} from "./../../Redux/State";
+import {ActionsTypes, MessagesPageType} from "./../../Redux/State";
 import TextArea from "./Textarea/TextArea";
 
 type DataType = {
     data: MessagesPageType
-    addMessage: (messageType: string)=> void
+    dispatch: (action: ActionsTypes)=> void
 }
 
 export const Dialogs = (props: DataType) => {
@@ -23,7 +23,7 @@ export const Dialogs = (props: DataType) => {
             <div className={s.messages}>
                 {messagesElements}
             </div>
-            <div><TextArea addMessage={props.addMessage}/></div>
+            <div><TextArea dispatch={props.dispatch}/></div>
         </div>
     )
 }

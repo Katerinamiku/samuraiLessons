@@ -1,8 +1,9 @@
 import React, {KeyboardEvent, useState} from "react";
 import s from './../Dialogs.module.css'
+import {ActionsTypes} from "../../../Redux/State";
 
 type textareaPropsType = {
-    addMessage: (messageType: string) => void
+    dispatch: (action: ActionsTypes)=> void
 }
 
 const TextArea = (props: textareaPropsType) => {
@@ -13,7 +14,7 @@ const TextArea = (props: textareaPropsType) => {
 
     const addMessage = () => {
         if (addedMessageRef.current) {
-            props.addMessage(addedMessageRef.current.value.trim())
+            props.dispatch({type: "ADD-MESSAGE", messageText: addedMessageRef.current.value.trim()})
             addedMessageRef.current.value = ''
         } else {
             setError('Text is required!')
