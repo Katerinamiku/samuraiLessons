@@ -1,0 +1,27 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs .dialogsItems {
+    padding: 10px;
+    color: white;
+}
+ a {
+    color: yellow;
+}
+
+.messages {
+    padding: 10px;
+}
+
+.messages .message {
+    color: white;
+}
+.error {
+    border: red 1px solid;
+}
+
+.errorMessage {
+    color: red;
+}

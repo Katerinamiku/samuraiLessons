@@ -1,19 +1,26 @@
 import React from 'react';
 import s from './NavBar.module.css';
-console.log(s)
+import {NavLink} from "react-router-dom";
 
-//let classesNew = `${s.item} ${s.active}` ---- можем добавить несколько классов
 
 export const NavBar = () => {
     return (
         <nav className={s.nav}>
-            <div className={`${s.item} ${s.active}`}> Profile </div>
-            <div className={s.item}> Messages</div>
-            <div className={s.item}>News</div>
-            <div className={s.item}>Music</div>
-            <div className={s.item}> Settings</div>
-
+            <div className={`${s.item} ${s.active}`}>
+                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/profile'> Profile </NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/dialogs'>Messages</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/news'>News</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/music'>Music</NavLink>
+            </div>
+            <div className={s.item}>
+                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/settings'>Settings</NavLink>
+            </div>
         </nav>
     );
-
 }
