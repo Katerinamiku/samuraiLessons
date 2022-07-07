@@ -1,40 +1,45 @@
-import React, {KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import s from './../Dialogs.module.css'
-import {ActionsTypes} from "../../../Redux/State";
 
 type textareaPropsType = {
-    dispatch: (action: ActionsTypes)=> void
+    newMessageText: string
+    updateNewMessageText: (newMessage: string)=>void
+    sendMessage: ()=>void
 }
 
 const TextArea = (props: textareaPropsType) => {
 
-    let [error, setError] = useState<string | null>('')
+    let [error, setError] = useState<string>('')
 
-    const addedMessageRef = React.createRef<HTMLTextAreaElement>();
+    const NewMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let newMessage = e.currentTarget.value;
+        props.updateNewMessageText(newMessage)
+    }
 
-    const addMessage = () => {
-        if (addedMessageRef.current) {
-            props.dispatch({type: "ADD-MESSAGE", messageText: addedMessageRef.current.value.trim()})
-            addedMessageRef.current.value = ''
+    const sendMessageHandler = () => {
+        if (props.newMessageText !== '') {
+            props.sendMessage()
         } else {
             setError('Text is required!')
         }
     }
     const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter') {
-            addMessage();
+            sendMessageHandler();
         }
     }
 
     return (
         <div>
             <div>
-            <textarea ref={addedMessageRef}
+            <textarea placeholder={'Enter your message'}
+                      value={props.newMessageText}
+                      onChange={NewMessageTextHandler}
                       onKeyPress={onKeyPressHandler}
                       className={error ? s.error : ''}
             ></textarea>
             </div>
-            <button onClick={addMessage}>Add Message</button>
+            <button onClick={sendMessageHandler}>Send</button>
             {error && <div className={s.errorMessage}>{error}</div>}
         </div>
     );

@@ -3,40 +3,36 @@ import './App.css';
 import {Header} from './components/Header/Header';
 import {NavBar} from './components/NavBar/NavBar';
 import {Profile} from './components/Profile/Profile';
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from './components/News/News';
 import {Music} from './components/Music/Music';
 import {Settings} from './components/Settings/Settings';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {StoreType} from "./Redux/State";
+import { Route, Routes} from "react-router-dom";
+import store, {DispatchType, ReduxStoreType, RootStateType} from "./Redux/reduxStore";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-
-type PropsType ={
-    store: StoreType
+type PropsType = {
+    state: RootStateType
+    dispatch: DispatchType
 }
 const App: React.FC<PropsType> = (props: PropsType) => {
- const state = props.store.getState();
-    console.log('state',state)
+
     return (
-        <BrowserRouter>
-            <div className='app-wrapper'>
-                <Header/>
-                <NavBar/>
-                <div className='app-wrapper-content'>
-                    <Routes>
-                        <Route path="/profile" element={
-                            <Profile profilePage={state.profilePage}
-                                     dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                        <Route path="/dialogs" element={
-                            <Dialogs data={state.messagesPage}
-                            dispatch={props.store.dispatch.bind(props.store)}/>}/>
-                        <Route path="/news" element={<News/>}/>
-                        <Route path="/music" element={<Music/>}/>
-                        <Route path="/settings" element={<Settings/>}/>
-                    </Routes>
-                </div>
+        <div className='app-wrapper'>
+            <Header/>
+            <NavBar/>
+            <div className='app-wrapper-content'>
+                <Routes>
+                    <Route path="/profile" element={<Profile state={props.state}
+                                                             dispatch={props.dispatch}/>}/>
+                    <Route path="/dialogs" element={<DialogsContainer state={props.state}
+                                                                      dispatch={props.dispatch}/>}/>
+                    <Route path="/news" element={<News/>}/>
+                    <Route path="/music" element={<Music/>}/>
+                    <Route path="/settings" element={<Settings/>}/>
+                </Routes>
             </div>
-        </BrowserRouter>
+        </div>
+
     )
 }
 
