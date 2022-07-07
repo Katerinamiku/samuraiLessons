@@ -6,7 +6,7 @@ import {PostType} from "../../../Redux/Store";
 type MyPostsTypes = {
     posts: Array<PostType>
     newPostText: string
-    updateNewPostText: (newText: string)=> void
+    updateNewPostText: (newText: string) => void
     addPost: (newPostText: string) => void
 }
 
@@ -38,7 +38,7 @@ export const MyPosts = (props: MyPostsTypes) => {
             <h3>my posts</h3>
             <div>
                 <div><textarea placeholder={'Meow something'}
-                    value={props.newPostText}
+                               value={props.newPostText}
                                onChange={NewPostTextHandler}
                                onKeyPress={onKeyPressHandler}
                                className={error ? s.error : ''}
