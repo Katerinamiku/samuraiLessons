@@ -1,43 +1,51 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
-import {ActionsTypes, PostType, StoreType} from "../../../Redux/State"
+import {PostType} from "../../../Redux/Store";
 
 type MyPostsTypes = {
     posts: Array<PostType>
     newPostText: string
-    dispatch: (actions: ActionsTypes) => void
+    updateNewPostText: (newText: string)=> void
+    addPost: (newPostText: string) => void
 }
 
 export const MyPosts = (props: MyPostsTypes) => {
 
+    let [error, setError] = useState<string>('')
+
     let postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likes={p.likes}/>)
 
-    let addPost = () => {
-        props.dispatch({type: "ADD-POST"})
+    let addPostHandler = () => {
+        if (props.newPostText !== '') {
+            props.addPost(props.newPostText)
+        } else {
+            setError('Text is required!')
+        }
     }
     const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
         if (event.key === 'Enter') {
-            addPost();
+            addPostHandler();
         }
     }
 
     const NewPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let text = e.currentTarget.value
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newText: text})
+        let newText = e.currentTarget.value
+        props.updateNewPostText(newText)
     }
     return (
         <div className={s.postsBlock}>
             <h3>my posts</h3>
             <div>
-                <div><textarea value={props.newPostText}
+                <div><textarea placeholder={'Meow something'}
+                    value={props.newPostText}
                                onChange={NewPostTextHandler}
                                onKeyPress={onKeyPressHandler}
-                               // className={error ? s.error : ''}
+                               className={error ? s.error : ''}
                 ></textarea></div>
                 <div>
-                    <button onClick={addPost}> Add Post</button>
-                    {/*{error && <div className={s.errorMessage}>{error}</div>}*/}
+                    <button onClick={addPostHandler}> Add Post</button>
+                    {error && <div className={s.errorMessage}>{error}</div>}
                 </div>
             </div>
             <div className={s.post}>

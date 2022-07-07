@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import ProfilePageReducer, {addPostAC, UpdateNewPostTextAC} from "./ProfilePageReducer";
+import MessagesPageReducer, {SendMessageAC, UpdateNewMessageTextAC} from "./MessagesPageReducer";
 
 export type StoreType = {
     _state: RootStateType
@@ -7,21 +9,10 @@ export type StoreType = {
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = UpdateNewPostTextActionType | AddMessageActionType | AddPostActionType
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof SendMessageAC> |ReturnType<typeof UpdateNewMessageTextAC>
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-    messageText: string
-}
 
-//обьект с данными и методами, корорые с этими данными взаиможейситвуют
+//обьект с данными и методами, корорые с этими данными взаимодейситвуют
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -31,7 +22,7 @@ let store: StoreType = {
                 {id: v1(), message: 'blabla', likes: 11},
                 {id: v1(), message: 'bebebe', likes: 11},
             ],
-            newPostText: 'Cats are great!'
+            newPostText: ' '
         },
         messagesPage: {
             dialogs: [
@@ -43,10 +34,11 @@ let store: StoreType = {
             ],
             messages: [
                 {id: v1(), message: 'Hi'},
-                {id: v1(), message: 'are'},
-                {id: v1(), message: 'fine'},
+                {id: v1(), message: 'Hello'},
+                {id: v1(), message: 'Super'},
                 {id: v1(), message: 'Yo'},
             ],
+            newMessageText: ''
         },
     },
     _callSubscriber() {
@@ -60,19 +52,9 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost: PostType = {id: v1(), message: this._state.profilePage.newPostText, likes: 0};
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state)
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state)
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newMessage: MessageType = {id: v1(), message: action.messageText}
-            this._state.messagesPage.messages.push(newMessage);
-            this._callSubscriber(this._state)
-        }
+        this._state.profilePage = ProfilePageReducer(this._state.profilePage, action); //делегировали решение редюсерам
+        this._state.messagesPage = MessagesPageReducer(this._state.messagesPage, action);
+        this._callSubscriber(this._state); //обновили стэйт
     }
 }
 
@@ -96,6 +78,7 @@ export type ProfilePageType = {
 export type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
