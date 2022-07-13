@@ -1,16 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
-import {PostType} from "../../../Redux/Store";
 
-type MyPostsTypes = {
-    posts: Array<PostType>
-    newPostText: string
-    updateNewPostText: (newText: string)=> void
-    addPost: (newPostText: string) => void
-}
+import {PostsPropsType} from "./MyPostsContainer";
 
-export const MyPosts = (props: MyPostsTypes) => {
+export const MyPosts = (props: PostsPropsType) => {
 
     let [error, setError] = useState<string>('')
 
@@ -18,7 +12,7 @@ export const MyPosts = (props: MyPostsTypes) => {
 
     let addPostHandler = () => {
         if (props.newPostText !== '') {
-            props.addPost(props.newPostText)
+            props.addPost()
         } else {
             setError('Text is required!')
         }
@@ -38,7 +32,7 @@ export const MyPosts = (props: MyPostsTypes) => {
             <h3>my posts</h3>
             <div>
                 <div><textarea placeholder={'Meow something'}
-                    value={props.newPostText}
+                               value={props.newPostText}
                                onChange={NewPostTextHandler}
                                onKeyPress={onKeyPressHandler}
                                className={error ? s.error : ''}
