@@ -2,6 +2,7 @@ import {combineReducers} from "redux";
 import ProfilePageReducer from "./ProfilePageReducer";
 import MessagesPageReducer from "./MessagesPageReducer";
 import { legacy_createStore as createStore} from 'redux'
+import {UsersReducer} from "./UsersReducer";
 
 
 export type RootStateType = ReturnType<typeof rootReducer>
@@ -11,7 +12,8 @@ export type RootStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
-    messagesPage: MessagesPageReducer
+    messagesPage: MessagesPageReducer,
+    usersPage: UsersReducer
 });
 
 export const store = createStore(rootReducer);

@@ -8,8 +8,8 @@ import {DialogsPropsType} from "./DialogsContainer";
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    let dialogsElements = props.messagesPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
-    let messagesElements = props.messagesPage.messages.map(m => <Message message={m.message} id={m.id}/>)
+    let dialogsElements = props.messagesPage.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
+    let messagesElements = props.messagesPage.messages.map(m => <Message message={m.message} key={m.id} id={m.id}/>)
 
     return (
         <div className={s.dialogs}>
