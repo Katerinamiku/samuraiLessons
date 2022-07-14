@@ -40,19 +40,16 @@ let initialState = {
 }
 
 const MessagesPageReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
+    //делаем копию стейта и копиб только того массива который будет меняться: dialogs не надо, и не надо сами
+    // обьекты Messages, так как все что мы здесь меняем - это добавляем новое в messages
+
     switch (action.type) {
         case 'SEND-MESSAGE': {
-            const newMessage: MessageType = {id: v1(), message: state.newMessageText}
-            let stateCopy = {...state};
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push(newMessage);
-            stateCopy.newMessageText = '';
-            return stateCopy;
+            const newMessage: MessageType = {id: v1(), message: state.newMessageText};
+            return {...state, newMessageText: '',messages: [...state.messages, newMessage]}
         }
         case 'UPDATE-NEW-MESSAGE-TEXT': {
-            let stateCopy = {...state};
-            stateCopy.newMessageText = action.newMessage;
-            return stateCopy;
+            return {...state, newMessageText: action.newMessage};
         }
         default:
             return state;
