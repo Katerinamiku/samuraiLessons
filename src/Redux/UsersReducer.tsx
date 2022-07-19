@@ -22,13 +22,18 @@ export type LocationType = {
 export type UsersPageType = {
     users: Array<UsersType>
 }
+export type PhotosType = {
+    small: string
+    large: string
+}
+
 export type UsersType = {
     id: string;
-    photoUrl: string
+    photos: PhotosType
     followed: boolean
-    fullName: string
+    name: string
     status: string
-    location: LocationType
+    location?: LocationType
 }
 
 export let initialState = {
