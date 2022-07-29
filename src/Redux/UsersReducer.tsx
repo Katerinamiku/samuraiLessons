@@ -12,8 +12,16 @@ type setUsersACType = {
     type: 'SET_USERS'
     users: Array<UsersType>
 }
+type setCurrentPage = {
+    type: 'SET_CURRENT_PAGE'
+    currentPage: number
+}
+type setTotalCount = {
+    type: 'SET_TOTAL_COUNT',
+    totalCount: number
+}
 
-export type ActionsTypes = followACType | unfollowACType | setUsersACType
+export type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPage | setTotalCount
 
 export type LocationType = {
     city: string
@@ -21,6 +29,9 @@ export type LocationType = {
 }
 export type UsersPageType = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 export type PhotosType = {
     small: string
@@ -37,7 +48,10 @@ export type UsersType = {
 }
 
 export let initialState = {
-    users: [ ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 };
 //в редьюсере копируем глубоко только то что меняем
 export const UsersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -61,7 +75,11 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
                 })
             }
         case 'SET_USERS':
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
+        case 'SET_CURRENT_PAGE':
+            return {...state, currentPage: action.currentPage}
+        case 'SET_TOTAL_COUNT':
+            return {...state, totalUsersCount: action.totalCount}
         default:
             return state;
     }
@@ -85,5 +103,17 @@ export const setUsersAC = (users: Array<UsersType>) => {
     return {
         type: 'SET_USERS',
         users
+    }
+}
+export const setCurrentPageAC = (page: number) => {
+    return {
+        type: 'SET_CURRENT_PAGE',
+        page
+    }
+}
+export const setTotalCountAC = (totalCount: number) => {
+    return {
+        type: 'SET_TOTAL_COUNT',
+        totalCount
     }
 }
