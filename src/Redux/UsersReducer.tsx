@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 
 type followACType = {
     type: 'FOLLOW'
@@ -20,8 +19,12 @@ type setTotalCount = {
     type: 'SET_TOTAL_COUNT',
     totalCount: number
 }
+type toogleIsFetchingAT = {
+    type: 'TOGGLE_IS_FETCHING'
+    value: boolean
+}
 
-export type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPage | setTotalCount
+export type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPage | setTotalCount | toogleIsFetchingAT
 
 export type LocationType = {
     city: string
@@ -32,12 +35,12 @@ export type UsersPageType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 export type PhotosType = {
     small: string
     large: string
 }
-
 export type UsersType = {
     id: string;
     photos: PhotosType
@@ -52,6 +55,7 @@ export let initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 };
 //в редьюсере копируем глубоко только то что меняем
 export const UsersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -80,6 +84,8 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
             return {...state, currentPage: action.currentPage}
         case 'SET_TOTAL_COUNT':
             return {...state, totalUsersCount: action.totalCount}
+        case 'TOGGLE_IS_FETCHING':
+            return {...state, isFetching: action.value}
         default:
             return state;
     }
@@ -115,5 +121,11 @@ export const setTotalCountAC = (totalCount: number) => {
     return {
         type: 'SET_TOTAL_COUNT',
         totalCount
+    }
+}
+export const toggleIsFetchingAC = (value: boolean) => {
+    return {
+        type: 'TOGGLE_IS_FETCHING',
+        value
     }
 }
