@@ -1,22 +1,36 @@
-import React from 'react';
-import {UsersPropsType} from "./UsersContainer";
-import s from './Users.module.css'
-import axios from 'axios';
-import userAvatar from '../../components/img/userAvatar.png'
+import React from "react";
+import s from "./Users.module.css";
+import userAvatar from "../../components/img/userAvatar.png";
+import {UsersType} from "../../Redux/UsersReducer";
 
-export const Users = (props: UsersPropsType) => {
+type UsersAPIPropsType = {
+    users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    onPageChanged: (p: number)=>void
+    follow: (userId: string)=>void
+    unfollow: (userId: string)=>void
+}
 
-    let getUsers = () => {
-        if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-                props.setUsers(response.data.items);
-            });
-        }
+
+export const Users = (props: UsersAPIPropsType) => {
+//цифры переключения сттаниц - нужно их помещать в стейт так как мы их меняем
+    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    const pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
 
     return (
         <div className={s.userWindow}>
-            <button style={{width: '130px'}} onClick={getUsers}>Get Users</button>
+            <div>
+                {pages.map(p => <span key={p} className={props.currentPage === p ? s.selectedPage : ''}
+                                      onClick={(e) => {
+                                          props.onPageChanged(p)
+                                      }}>{p}</span>)}
+
+            </div>
             {props.users.map(u => <div key={u.id}>
                 <div className={s.userInfo}>
                 <span className={s.avatarWindow}>
@@ -47,4 +61,6 @@ export const Users = (props: UsersPropsType) => {
         </div>
     );
 };
+
+
 
