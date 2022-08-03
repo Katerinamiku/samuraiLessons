@@ -1,15 +1,14 @@
 import {v1} from "uuid";
 import ProfilePageReducer, {addPostAC, UpdateNewPostTextAC} from "./ProfilePageReducer";
 import MessagesPageReducer, {SendMessageAC, UpdateNewMessageTextAC} from "./MessagesPageReducer";
-
-export type StoreType = {
+ type StoreType = {
     _state: RootStateType
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof SendMessageAC> |ReturnType<typeof UpdateNewMessageTextAC>
+type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof UpdateNewPostTextAC> | ReturnType<typeof SendMessageAC> |ReturnType<typeof UpdateNewMessageTextAC>
 
 
 //обьект с данными и методами, корорые с этими данными взаимодейситвуют
@@ -22,7 +21,8 @@ let store: StoreType = {
                 {id: v1(), message: 'blabla', likes: 11},
                 {id: v1(), message: 'bebebe', likes: 11},
             ],
-            newPostText: ' '
+            newPostText: ' ',
+            profile: null
         },
         messagesPage: {
             dialogs: [
@@ -58,29 +58,30 @@ let store: StoreType = {
     }
 }
 
-export type PostType = {
+ type PostType = {
     id: string
     message: string
     likes: number
 }
-export type DialogType = {
+ type DialogType = {
     id: string
     name: string
 }
-export type MessageType = {
+ type MessageType = {
     id: string
     message: string
 }
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
+     profile: any
 }
-export type MessagesPageType = {
+ type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
 }
-export type RootStateType = {
+ type RootStateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
 }
