@@ -2,15 +2,16 @@ import React from "react";
 import s from "./Users.module.css";
 import userAvatar from "../../components/img/userAvatar.png";
 import {UsersType} from "../../Redux/UsersReducer";
+import {NavLink} from "react-router-dom";
 
 type UsersAPIPropsType = {
     users: Array<UsersType>
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    onPageChanged: (p: number)=>void
-    follow: (userId: string)=>void
-    unfollow: (userId: string)=>void
+    onPageChanged: (p: number) => void
+    follow: (userId: string) => void
+    unfollow: (userId: string) => void
 }
 
 
@@ -26,15 +27,17 @@ export const Users = (props: UsersAPIPropsType) => {
         <div className={s.userWindow}>
             <div>
                 {pages.map(p => <span key={p} className={props.currentPage === p ? s.selectedPage : ''}
-                                      onClick={(e) => {
-                                          props.onPageChanged(p)
-                                      }}>{p}</span>)}
+                                      onClick={(e) => {props.onPageChanged(p)}}>{p}</span>)}
 
             </div>
             {props.users.map(u => <div key={u.id}>
                 <div className={s.userInfo}>
                 <span className={s.avatarWindow}>
-                    <div><img className={s.avatar} src={u.photos.small != null ? u.photos.small : userAvatar}/></div>
+                    <div>
+                        <NavLink to={'/profile/' + u.id}>
+                        <img className={s.avatar} src={u.photos.small != null ? u.photos.small : userAvatar}/>
+                        </NavLink>
+                        </div>
                     <div>
                         {u.followed
                             ? <button onClick={() => {

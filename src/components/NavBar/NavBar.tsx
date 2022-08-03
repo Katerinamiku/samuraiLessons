@@ -6,23 +6,23 @@ import {NavLink} from "react-router-dom";
 export const NavBar = () => {
     return (
         <nav className={s.nav}>
-            <div className={`${s.item} ${s.active}`}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/profile'> Prrofile </NavLink>
+            <div className = {`${s.item} ${s.active}`}>
+                <NavLink to='/profile' activeClassName={s.active}> Profile </NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/dialogs'>Meowssages</NavLink>
+            <div className = {`${s.item}`}>
+                <NavLink to='/dialogs' activeClassName={s.active}> Messages </NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/news'>News</NavLink>
+            <div className = {`${s.item}`}>
+                <NavLink to='/users' activeClassName={s.active}> Users </NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/users'>Users</NavLink>
+            <div className = {`${s.item}`}>
+                <NavLink to='/news' activeClassName={s.active}> News </NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/music'>Music</NavLink>
+            <div className = {`${s.item}`}>
+                <NavLink to='/music' activeClassName={s.active}> Music </NavLink>
             </div>
-            <div className={s.item}>
-                <NavLink className={(navData) => navData.isActive ? s.active : s.item} to='/settings'>Settings</NavLink>
+            <div className = {`${s.item}`}>
+                <NavLink to='/setting' activeClassName={s.active}> Setting </NavLink>
             </div>
         </nav>
     );

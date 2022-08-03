@@ -1,19 +1,17 @@
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/reduxStore";
-import {Dispatch} from "redux";
 import {
-    followAC,
-    setCurrentPageAC,
-    setTotalCountAC,
-    setUsersAC,
-    toggleIsFetchingAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setTotalCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
     UsersType
 } from "../../Redux/UsersReducer";
 import React from "react";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from "../img/preloader.svg";
 import Preloader from "../Common/Preloader/Preloader";
 
 //положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
@@ -79,30 +77,36 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         isFetching: state.usersPage.isFetching,
     }
 }
-const dispatchToProps = (dispatch: Dispatch): dispatchToPropsType => {
-    return {
-        follow: (userId: string) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: string) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(setCurrentPageAC(page))
-        },
-        setTotalCount: (totalCount: number) => {
-            dispatch(setTotalCountAC(totalCount))
-        },
-        toggleIsFetching: (value: boolean) => {
-            dispatch(toggleIsFetchingAC(value))
-        }
-    }
-}
 
-export default connect(mapStateToProps, dispatchToProps)(UsersContainer);
+//можно вместо mapDispatchtoprops сразу передать в connect обьект cо ссфлками на экшн криэйьеры
+//а также можно переименовать экшн криэйторы без АС и тогда сократиться запись
+
+// const dispatchToProps = (dispatch: Dispatch): dispatchToPropsType => {
+//     return {
+//         follow: (userId: string) => {
+//             dispatch(followAC(userId))
+//         },
+//         unfollow: (userId: string) => {
+//             dispatch(unfollowAC(userId))
+//         },
+//         setUsers: (users: Array<UsersType>) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (page: number) => {
+//             dispatch(setCurrentPageAC(page))
+//         },
+//         setTotalCount: (totalCount: number) => {
+//             dispatch(setTotalCountAC(totalCount))
+//         },
+//         toggleIsFetching: (value: boolean) => {
+//             dispatch(toggleIsFetchingAC(value))
+//         }
+//     }
+// }
+
+export default connect(mapStateToProps,
+    {follow, unfollow, setUsers,
+        setCurrentPage, setTotalCount, toggleIsFetching})(UsersContainer);
 
 
 
