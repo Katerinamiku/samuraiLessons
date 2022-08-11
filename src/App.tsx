@@ -9,13 +9,14 @@ import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Redirect, Route} from "react-router-dom";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 const App = () => {
 
     return (
         <div className='app-wrapper'>
-            <Header/>
+            <HeaderContainer/>
             <NavBar/>
             <div className='app-wrapper-content'>
                 <Route path={'/'} exact render={() => <Redirect to={'/profile'}/>}/>
