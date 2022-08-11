@@ -8,3 +8,7 @@
     border: solid white 2px;
     border-radius: 60%;
 }
+
+.loginBlock {
+    float: right;
+}

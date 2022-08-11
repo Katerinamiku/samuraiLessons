@@ -4,36 +4,39 @@ import {
     follow,
     setCurrentPage,
     setTotalCount,
-    setUsers,
+    setUsers, toggleFollowingInProgress,
     toggleIsFetching,
     unfollow,
     UsersType
 } from "../../Redux/UsersReducer";
 import React from "react";
-import axios from "axios";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {usersAPI} from "../../API/api";
 
 //положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
 class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
+
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items);
                 this.props.toggleIsFetching(false);
-                this.props.setTotalCount(response.data.totalCount);
+                this.props.setTotalCount(data.totalCount);
             });
     }
 
     onPageChanged = (page: number) => {
         this.props.setCurrentPage(page)
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items);
-            this.props.toggleIsFetching(false);
-        });
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true}) вместо запроса функция которая на стотне этот запрос делает
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items);
+                this.props.toggleIsFetching(false);
+            });
     }
 
     render() {
@@ -45,8 +48,11 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    onPageChanged={this.onPageChanged}
                    follow={this.props.follow}
                    unfollow={this.props.unfollow}
-                   users={this.props.users}/>
-            </>
+                   users={this.props.users}
+                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                   followingInProgress={this.props.followingInProgress}
+                   />
+        </>
     }
 }
 
@@ -57,14 +63,16 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 type dispatchToPropsType = {
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (page: number) => void
     setTotalCount: (totalCount: number) => void
     toggleIsFetching: (value: boolean) => void
+    toggleFollowingInProgress: (value: boolean, id: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & dispatchToPropsType;
 
@@ -75,12 +83,12 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
 //можно вместо mapDispatchtoprops сразу передать в connect обьект cо ссфлками на экшн криэйьеры
 //а также можно переименовать экшн криэйторы без АС и тогда сократиться запись
-
 // const dispatchToProps = (dispatch: Dispatch): dispatchToPropsType => {
 //     return {
 //         follow: (userId: string) => {
@@ -105,8 +113,8 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 // }
 
 export default connect(mapStateToProps,
-    {follow, unfollow, setUsers,
-        setCurrentPage, setTotalCount, toggleIsFetching})(UsersContainer);
-
-
+    {
+        follow, unfollow, setUsers,
+        setCurrentPage, setTotalCount, toggleIsFetching, toggleFollowingInProgress
+    })(UsersContainer);
 

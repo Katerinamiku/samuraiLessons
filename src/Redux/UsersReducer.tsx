@@ -1,30 +1,35 @@
 
-type followACType = {
+type followAT = {
     type: 'FOLLOW'
-    userId: string
+    id: number
 }
-type unfollowACType = {
+type unfollowAT = {
     type: 'UNFOLLOW'
-    userId: string
+    id: number
 }
-type setUsersACType = {
+type setUsersAT = {
     type: 'SET_USERS'
     users: Array<UsersType>
 }
-type setCurrentPage = {
+type setCurrentPageAT = {
     type: 'SET_CURRENT_PAGE'
-    currentPage: number
+    page: number
 }
-type setTotalCount = {
+type setTotalCountAT = {
     type: 'SET_TOTAL_COUNT',
     totalCount: number
 }
-type toogleIsFetchingAT = {
+type toggleIsFetchingAT = {
     type: 'TOGGLE_IS_FETCHING'
     value: boolean
 }
+type toggleFollowingInProgressAT = {
+    type: 'TOGGLE_FOLLOWING_IN_PROGRESS'
+    value: boolean
+    id: number
+}
 
-export type ActionsTypes = followACType | unfollowACType | setUsersACType | setCurrentPage | setTotalCount | toogleIsFetchingAT
+export type ActionsTypes = followAT | unfollowAT | setUsersAT | setCurrentPageAT | setTotalCountAT | toggleIsFetchingAT | toggleFollowingInProgressAT
 
 export type LocationType = {
     city: string
@@ -36,13 +41,14 @@ export type UsersPageType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: number[]
 }
 export type PhotosType = {
     small: string
     large: string
 }
 export type UsersType = {
-    id: string;
+    id: number;
     photos: PhotosType
     followed: boolean
     name: string
@@ -56,6 +62,7 @@ export let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: []
 };
 //в редьюсере копируем глубоко только то что меняем
 export const UsersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -63,7 +70,7 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
         case 'FOLLOW':
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userId) {
+                    if (u.id === action.id) {
                         return {...u, followed: true}
                     }
                     return u;
@@ -72,7 +79,7 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
         case 'UNFOLLOW':
             return {
                 ...state, users: state.users.map(u => {
-                    if (u.id === action.userId) {
+                    if (u.id === action.id) {
                         return {...u, followed: false}
                     }
                     return u;
@@ -81,11 +88,14 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
         case 'SET_USERS':
             return {...state, users: [...action.users]}
         case 'SET_CURRENT_PAGE':
-            return {...state, currentPage: action.currentPage}
+            return {...state, currentPage: action.page}
         case 'SET_TOTAL_COUNT':
             return {...state, totalUsersCount: action.totalCount}
         case 'TOGGLE_IS_FETCHING':
             return {...state, isFetching: action.value}
+        case 'TOGGLE_FOLLOWING_IN_PROGRESS':
+            return {...state,
+                followingInProgress: action.value ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(id => id !== action.id)}
         default:
             return state;
     }
@@ -93,39 +103,46 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
 }
 
 //action creators
-export const follow = (userId: string) => {
+export const follow = (id: number): followAT => {
     return {
         type: 'FOLLOW',
-        userId
+        id
     }
 }
-export const unfollow = (userId: string) => {
+export const unfollow = (id: number): unfollowAT => {
     return {
         type: 'UNFOLLOW',
-        userId
+        id
     }
 }
-export const setUsers = (users: Array<UsersType>) => {
+export const setUsers = (users: Array<UsersType>): setUsersAT => {
     return {
         type: 'SET_USERS',
         users
     }
 }
-export const setCurrentPage = (page: number) => {
+export const setCurrentPage = (page: number): setCurrentPageAT => {
     return {
         type: 'SET_CURRENT_PAGE',
         page
     }
 }
-export const setTotalCount = (totalCount: number) => {
+export const setTotalCount = (totalCount: number): setTotalCountAT => {
     return {
         type: 'SET_TOTAL_COUNT',
         totalCount
     }
 }
-export const toggleIsFetching = (value: boolean) => {
+export const toggleIsFetching = (value: boolean): toggleIsFetchingAT => {
     return {
         type: 'TOGGLE_IS_FETCHING',
         value
+    }
+}
+export const toggleFollowingInProgress = (value: boolean, id: number):toggleFollowingInProgressAT => {
+    return {
+        type: 'TOGGLE_FOLLOWING_IN_PROGRESS',
+        value,
+        id
     }
 }
