@@ -1,3 +1,5 @@
+import {usersAPI} from "../API/api";
+import {Dispatch} from "redux";
 
 type followAT = {
     type: 'FOLLOW'
@@ -29,7 +31,14 @@ type toggleFollowingInProgressAT = {
     id: number
 }
 
-export type ActionsTypes = followAT | unfollowAT | setUsersAT | setCurrentPageAT | setTotalCountAT | toggleIsFetchingAT | toggleFollowingInProgressAT
+export type ActionsTypes =
+    followAT
+    | unfollowAT
+    | setUsersAT
+    | setCurrentPageAT
+    | setTotalCountAT
+    | toggleIsFetchingAT
+    | toggleFollowingInProgressAT
 
 export type LocationType = {
     city: string
@@ -94,8 +103,10 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
         case 'TOGGLE_IS_FETCHING':
             return {...state, isFetching: action.value}
         case 'TOGGLE_FOLLOWING_IN_PROGRESS':
-            return {...state,
-                followingInProgress: action.value ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(id => id !== action.id)}
+            return {
+                ...state,
+                followingInProgress: action.value ? [...state.followingInProgress, action.id] : state.followingInProgress.filter(id => id !== action.id)
+            }
         default:
             return state;
     }
@@ -103,13 +114,13 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
 }
 
 //action creators
-export const follow = (id: number): followAT => {
+export const followSuccess = (id: number): followAT => {
     return {
         type: 'FOLLOW',
         id
     }
 }
-export const unfollow = (id: number): unfollowAT => {
+export const unfollowSuccess = (id: number): unfollowAT => {
     return {
         type: 'UNFOLLOW',
         id
@@ -139,10 +150,49 @@ export const toggleIsFetching = (value: boolean): toggleIsFetchingAT => {
         value
     }
 }
-export const toggleFollowingInProgress = (value: boolean, id: number):toggleFollowingInProgressAT => {
+export const toggleFollowingInProgress = (value: boolean, id: number): toggleFollowingInProgressAT => {
     return {
         type: 'TOGGLE_FOLLOWING_IN_PROGRESS',
         value,
         id
+    }
+}
+
+
+//Thunks
+export const getUsers = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleIsFetching(true));
+
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items));
+                dispatch(toggleIsFetching(false));
+                dispatch(setTotalCount(data.totalCount));
+            });
+    }
+}
+export const follow = (id: number) => {
+    return (dispatch: Dispatch) => {
+       dispatch(toggleFollowingInProgress(true, id));
+        usersAPI.setFollow(id)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(followSuccess(id));
+                }
+              dispatch(toggleFollowingInProgress(false, id));
+            });
+    }
+}
+export const unfollow = (id: number) => {
+    return (dispatch: Dispatch) => {
+        dispatch(toggleFollowingInProgress(true, id));
+        usersAPI.setUnfollow(id)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unfollowSuccess(id));
+                }
+                dispatch(toggleFollowingInProgress(false, id));
+            });
     }
 }

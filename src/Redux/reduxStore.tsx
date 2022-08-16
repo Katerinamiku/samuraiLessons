@@ -1,10 +1,10 @@
-import {combineReducers} from "redux";
+import {applyMiddleware, combineReducers} from "redux";
 import ProfilePageReducer from "./ProfilePageReducer";
 import MessagesPageReducer from "./MessagesPageReducer";
 import { legacy_createStore as createStore} from 'redux'
 import {UsersReducer} from "./UsersReducer";
 import authReducer from "./authReducer";
-
+import thunkMiddleware from 'redux-thunk';
 
 export type RootStateType = ReturnType<typeof rootReducer>
 // export type DispatchType = typeof store.dispatch;
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     auth: authReducer
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 
 

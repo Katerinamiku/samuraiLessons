@@ -1,6 +1,9 @@
 import {v1} from "uuid";
 import {SendMessageAC, UpdateNewMessageTextAC} from "./MessagesPageReducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../API/api";
 
+//------------Types-------------
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof UpdateNewPostTextAC>
@@ -41,6 +44,7 @@ export type PostType = {
     message: string
     likes: number
 }
+//----------------------------------------------------------------
 export let initialState = {
     posts: [
         {id: v1(), message: 'Hi, how are you', likes: 12},
@@ -51,6 +55,7 @@ export let initialState = {
     newPostText: ' ',
     profile: null
 }
+
 //в редьюсере копируем глубоко только то что меняем
 export const ProfilePageReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
@@ -72,7 +77,7 @@ export const ProfilePageReducer = (state: ProfilePageType = initialState, action
 
 export default ProfilePageReducer
 
-
+//-------------AC--------------
 export const addPostAC = () => {
     return {
         type: "ADD-POST"
@@ -90,4 +95,13 @@ export const setUserProfile = (profile: UserProfileType | null) => {
         type: "SET_USER_PROFILE",
         profile
     } as const
+}
+//---------Thunk--------------
+export const getUserProfileInfo = (id: string) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getUserProfileInfo(id)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            });
+    }
 }
