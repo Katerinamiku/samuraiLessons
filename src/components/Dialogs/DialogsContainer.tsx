@@ -4,23 +4,37 @@ import {MessagesPageType, SendMessageAC, UpdateNewMessageTextAC} from "../../Red
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/reduxStore";
 import {Dispatch} from "redux";
+
+
 //конткйнер может принимать все данные вскючая стор и передвать что нужно презентационной
 type MapStateToPropsType = {
-     messagesPage: MessagesPageType }
+    messagesPage: MessagesPageType
+    isAuth: boolean
+}
+
 type DispatchToPropsType = {
-    updateNewMessageText: (newMessage: string) =>void,
-    sendMessage: () => void }
+    updateNewMessageText: (newMessage: string) => void,
+    sendMessage: () => void
+}
 
 //обькдиненный тип для всего Dialogs - передаем его в props
 export type DialogsPropsType = MapStateToPropsType & DispatchToPropsType;
 //---------------------------------------------------------
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
-    return {messagesPage: state.messagesPage}
+    return {
+        messagesPage: state.messagesPage,
+        isAuth: state.auth.isAuth
+    }
 }
 const dispatchToProps = (dispatch: Dispatch): DispatchToPropsType => {
     return {
-        updateNewMessageText: (newMessage: string) => {dispatch(UpdateNewMessageTextAC(newMessage))},
-        sendMessage:() => {dispatch(SendMessageAC())}}
+        updateNewMessageText: (newMessage: string) => {
+            dispatch(UpdateNewMessageTextAC(newMessage))
+        },
+        sendMessage: () => {
+            dispatch(SendMessageAC())
+        }
+    }
 }
 
 

@@ -2,24 +2,11 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {RootStateType} from "../../Redux/reduxStore";
 import {connect} from "react-redux";
-import {setUserProfile, UserProfileType} from "../../Redux/ProfilePageReducer";
-import {withRouter, RouteComponentProps} from "react-router-dom";
-import {userProfileData} from "../../API/api";
+import {getUserProfileInfo, UserProfileType} from "../../Redux/ProfilePageReducer";
+import {withRouter, RouteComponentProps, Redirect} from "react-router-dom";
 
-
-//-------------TYPES--------------------------
-type mapStateToPropsType = {
-    profile: UserProfileType | null
-}
-type dispatchType = {
-    setUserProfile: (profile: UserProfileType | null) => void
-}
-type withRouteType = {
-    userId: string | undefined
-}
 type commonTypes = RouteComponentProps<withRouteType> & ProfilePageType;
 export type ProfilePageType = mapStateToPropsType & dispatchType;
-
 
 //----------------------ClassCompContainer------------------------------
 class ProfileContainer extends React.Component<commonTypes> {
@@ -31,32 +18,45 @@ class ProfileContainer extends React.Component<commonTypes> {
         if (!userId) {
             userId = String(2);
         }
-        userProfileData.getUserProfileInfo(userId)
-            .then(data => {
-                this.props.setUserProfile(data);
-            });
+        this.props.getUserProfileInfo(userId)
     }
 
     render() {
+        if (!this.props.isAuth) {
+            return <Redirect to={'/login'}/>
+        }
+
         return (
             <div>
                 <Profile {...this.props}
                          profile={this.props.profile}
-                         setUserProfile={this.props.setUserProfile}/>
+                         />
             </div>
         )
     }
 }
 
 //---------------------withRouter-------------------------
+type withRouteType = {
+    userId: string | undefined
+}
+
 let WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
 //-----------------------connect----------------
+type mapStateToPropsType = {
+    profile: UserProfileType | null
+    isAuth: boolean
+}
+type dispatchType = {
+    getUserProfileInfo: (id: string) => void
+}
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        isAuth: state.auth.isAuth
     }
 }
 
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {getUserProfileInfo})(WithUrlDataContainerComponent)
