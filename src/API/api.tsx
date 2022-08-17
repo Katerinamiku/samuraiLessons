@@ -23,6 +23,11 @@ export const usersAPI = {
     },
     getUserProfileInfo(id: string) {
         return instance.get(`profile/` + id)
+    },
+    getFriends() {
+        return instance.get('https://social-network.samuraijs.com/api/1.0/users?friend=true').then(response => {
+            return response.data
+        })
     }
 }
 

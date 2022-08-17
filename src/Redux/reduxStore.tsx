@@ -5,6 +5,7 @@ import { legacy_createStore as createStore} from 'redux'
 import {UsersReducer} from "./UsersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from 'redux-thunk';
+import {friendsReducer} from "./FriendsReducer";
 
 export type RootStateType = ReturnType<typeof rootReducer>
 // export type DispatchType = typeof store.dispatch;
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
     messagesPage: MessagesPageReducer,
     usersPage: UsersReducer,
-    auth: authReducer
+    auth: authReducer,
+    friends: friendsReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

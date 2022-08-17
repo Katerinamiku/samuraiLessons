@@ -11,7 +11,6 @@ import React from "react";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 
-
 //положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
 class UsersContainer extends React.Component<UsersPropsType> {
 

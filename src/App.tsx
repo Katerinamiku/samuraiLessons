@@ -10,6 +10,8 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import {Redirect, Route} from "react-router-dom";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import FriendsContainer from "./components/Users/FriendsContainer";
+
 
 
 const App = () => {
@@ -27,6 +29,7 @@ const App = () => {
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/login'} render={() => <Login/>}/>
+                <Route path={'/friends'} render={() => <FriendsContainer/>}/>
             </div>
         </div>
     )
