@@ -10,6 +10,8 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 //положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -74,6 +76,8 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     }
 }
 
+//запретим видеть Users неавторизованным добавим withAuthRedirect
+
 //можно вместо mapDispatchtoprops сразу передать в connect обьект cо ссфлками на экшн криэйьеры
 //а также можно переименовать экшн криэйторы без АС и тогда сократиться запись
 // const dispatchToProps = (dispatch: Dispatch): dispatchToPropsType => {
@@ -99,8 +103,6 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 //     }
 // }
 
-export default connect(mapStateToProps,
-    {
-        follow, unfollow, setCurrentPage, getUsers
-    })(UsersContainer);
-
+export default compose<React.ComponentType>(connect(mapStateToProps,
+    {follow, unfollow, setCurrentPage, getUsers}),
+    withAuthRedirect) (UsersContainer);

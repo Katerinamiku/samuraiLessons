@@ -3,6 +3,8 @@ import userAvatar from "../../components/img/userAvatar.png";
 import {UsersType} from "../../Redux/FriendsReducer";
 import s from "./Users.module.css";
 
+
+
 type FriendPropsType = {
     friends: Array<UsersType>
 }
@@ -12,8 +14,7 @@ const Friends = (props: FriendPropsType) => {
     if (!props.friends.length) {
         return <div> Friends not found</div>
     }
-
-    return (
+        return (
         <div>
             {props.friends.map(friend =>
                 <div>

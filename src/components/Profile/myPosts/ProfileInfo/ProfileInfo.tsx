@@ -2,8 +2,9 @@ import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../../Common/Preloader/Preloader";
 import {UserProfileType} from "../../../../Redux/ProfilePageReducer";
-
-const BackgroundCover = require('./BGcovering.jpg');
+import ProfileStatus from "./ProfileStatus";
+//
+// const BackgroundCover = require('./BGcovering.jpg');
 
 type ProfileInfoType = {
     profile: UserProfileType | null
@@ -16,10 +17,13 @@ export const ProfileInfo = (props: ProfileInfoType) => {
     return (
         <div>
             <div>
-                <img src={BackgroundCover} alt='background cover'/>
+                {/*<img src={BackgroundCover} alt='background cover'/>*/}
             </div>
             <div className={s.descriptionBlock}>
                <img src={props.profile.photos.large}/>
+            </div>
+            <div>
+                <ProfileStatus status={'Хардкодный статус'}/>
             </div>
             <div>
                 <div>{`${props.profile.fullName}`}</div>

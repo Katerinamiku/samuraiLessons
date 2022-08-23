@@ -21,7 +21,7 @@ export const usersAPI = {
     setUnfollow(id: number) {
         return instance.delete(`follow/${id}`)
     },
-    getUserProfileInfo(id: string) {
+    getUserProfileInfo(id: number) {
         return instance.get(`profile/` + id)
     },
     getFriends() {
