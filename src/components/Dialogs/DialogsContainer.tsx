@@ -3,27 +3,27 @@ import {Dialogs} from "./Dialogs";
 import {MessagesPageType, SendMessageAC, UpdateNewMessageTextAC} from "../../Redux/MessagesPageReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/reduxStore";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+
+//-------------------------HOC----------------------
+//создаем HOC над Dialogs который будет делать редирект: конт комп над конт комп - и уже передаем крайний конт комп дальше в connect
 
 
+//-----------------------connect----------------------
 //конткйнер может принимать все данные вскючая стор и передвать что нужно презентационной
 type MapStateToPropsType = {
     messagesPage: MessagesPageType
-    isAuth: boolean
 }
-
 type DispatchToPropsType = {
     updateNewMessageText: (newMessage: string) => void,
     sendMessage: () => void
 }
-
-//обькдиненный тип для всего Dialogs - передаем его в props
 export type DialogsPropsType = MapStateToPropsType & DispatchToPropsType;
-//---------------------------------------------------------
+
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         messagesPage: state.messagesPage,
-        isAuth: state.auth.isAuth
     }
 }
 const dispatchToProps = (dispatch: Dispatch): DispatchToPropsType => {
@@ -37,6 +37,6 @@ const dispatchToProps = (dispatch: Dispatch): DispatchToPropsType => {
     }
 }
 
-
-export const DialogsContainer = connect(mapStateToProps, dispatchToProps)(Dialogs);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, dispatchToProps), withAuthRedirect) (Dialogs)
 

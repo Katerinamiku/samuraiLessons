@@ -8,10 +8,7 @@ export type UserProfileInfoType = {
     profile: UserProfileType | null
 }
 
-
 export const Profile = (props: UserProfileInfoType) => {
-
-
 
     return (
         <div>

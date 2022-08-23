@@ -97,7 +97,7 @@ export const setUserProfile = (profile: UserProfileType | null) => {
     } as const
 }
 //---------Thunk--------------
-export const getUserProfileInfo = (id: string) => {
+export const getUserProfileInfo = (id: number) => {
     return (dispatch: Dispatch) => {
         usersAPI.getUserProfileInfo(id)
             .then(response => {
