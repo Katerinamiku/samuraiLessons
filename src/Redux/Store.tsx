@@ -22,7 +22,8 @@ let store: StoreType = {
                 {id: v1(), message: 'bebebe', likes: 11},
             ],
             newPostText: ' ',
-            profile: null
+            profile: null,
+            status: ''
         },
         messagesPage: {
             dialogs: [
@@ -75,6 +76,7 @@ let store: StoreType = {
     posts: Array<PostType>
     newPostText: string
      profile: any
+     status: string
 }
  type MessagesPageType = {
     dialogs: Array<DialogType>

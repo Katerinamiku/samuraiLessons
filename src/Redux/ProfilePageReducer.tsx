@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 import {SendMessageAC, UpdateNewMessageTextAC} from "./MessagesPageReducer";
 import {Dispatch} from "redux";
-import {usersAPI} from "../API/api";
+import {profileAPI, usersAPI} from "../API/api";
 
 //------------Types-------------
 export type ActionsTypes =
@@ -10,6 +10,7 @@ export type ActionsTypes =
     | ReturnType<typeof SendMessageAC>
     | ReturnType<typeof UpdateNewMessageTextAC>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatus>
 
 type ContactsType = {
     facebook: string | null
@@ -38,6 +39,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: UserProfileType | null
+    status: string
 }
 export type PostType = {
     id: string
@@ -53,7 +55,8 @@ export let initialState = {
         {id: v1(), message: 'bebebe', likes: 11},
     ],
     newPostText: ' ',
-    profile: null
+    profile: null,
+    status: ' '
 }
 
 //в редьюсере копируем глубоко только то что меняем
@@ -69,6 +72,9 @@ export const ProfilePageReducer = (state: ProfilePageType = initialState, action
         case 'SET_USER_PROFILE': {
             return {...state, profile: action.profile}
         }
+        case 'SET_STATUS': {
+            return {...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -83,7 +89,6 @@ export const addPostAC = () => {
         type: "ADD-POST"
     } as const
 }
-
 export const UpdateNewPostTextAC = (newText: string) => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
@@ -96,12 +101,36 @@ export const setUserProfile = (profile: UserProfileType | null) => {
         profile
     } as const
 }
+export const setStatus = (status: string) => {
+    return {
+        type: "SET_STATUS",
+        status
+    } as const
+}
 //---------Thunk--------------
 export const getUserProfileInfo = (id: number) => {
     return (dispatch: Dispatch) => {
         usersAPI.getUserProfileInfo(id)
             .then(response => {
                 dispatch(setUserProfile(response.data));
+            });
+    }
+}
+export const getStatus = (id: number) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(id)
+            .then(response => {
+                dispatch(setStatus(response.data));
+            });
+    }
+}
+export const updateStatus = (status: string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setStatus(status))
+                }
             });
     }
 }
