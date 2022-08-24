@@ -1,11 +1,12 @@
 import axios from "axios";
+import {FormDataType} from "../components/Login/LoginForm";
 
 //с помощью этого можно поместить настройки по работе с опр апи чтобы не дублировать код
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
-        'API-KEY': '423c54e8-cb45-4004-b2cf-718d12931665'
+        'API-KEY': 'f27eec27-3207-4d58-92ee-5102237ee07d'
     }
 })
 //сделаем обьект c методами, где обьединим все для удобства работы с эндпоинтами
@@ -22,7 +23,8 @@ export const usersAPI = {
         return instance.delete(`follow/${id}`)
     },
     getUserProfileInfo(id: number) {
-        return instance.get(`profile/` + id)
+        console.warn('Obsolete method. Please use profileAPI object')
+        return profileAPI.getUserProfileInfo(id)
     },
     getFriends() {
         return instance.get('https://social-network.samuraijs.com/api/1.0/users?friend=true').then(response => {
@@ -31,8 +33,24 @@ export const usersAPI = {
     }
 }
 
+export const profileAPI = {
+    getUserProfileInfo(id: number) {
+        return instance.get(`profile/` + id)
+    },
+    getStatus(id: number) {
+        return instance.get(`profile/status/` + id)
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status/`, {status: status})
+    }
+}
+
 export const authAPI = {
     setAuthUserData() {
         return instance.get(`auth/me`)
+    },
+    setLoginData(formData: FormDataType) {
+        return instance.post(`/auth/login`, {email: formData.email, password: formData.password, rememberMe: formData.rememberMe})
     }
 }
+

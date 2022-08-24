@@ -31,13 +31,14 @@ export const authReducer = (state: AuthMeType = initialState, action: ActionsTyp
 
 export default authReducer
 
-
+//--------------AC-------------------
 export const setAuthUserData = (data: AuthMeType) => {
     return {
         type: "SET_USER_DATA",
         data
     } as const
 }
+//---------------THUNK-----------------
 export const getAuthUserData = () => {
     return (dispatch: Dispatch) => {
         authAPI.setAuthUserData()

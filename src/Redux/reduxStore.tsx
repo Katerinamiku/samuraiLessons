@@ -6,18 +6,18 @@ import {UsersReducer} from "./UsersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from 'redux-thunk';
 import {friendsReducer} from "./FriendsReducer";
+import { reducer as formReducer } from "redux-form";
+
 
 export type RootStateType = ReturnType<typeof rootReducer>
-// export type DispatchType = typeof store.dispatch;
-// export type ReduxStoreType = typeof store;
-
 
 const rootReducer = combineReducers({
     profilePage: ProfilePageReducer,
     messagesPage: MessagesPageReducer,
     usersPage: UsersReducer,
     auth: authReducer,
-    friends: friendsReducer
+    friends: friendsReducer,
+    form: formReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
