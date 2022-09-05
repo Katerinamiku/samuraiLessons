@@ -1,12 +1,7 @@
 import {v1} from "uuid";
 
-import {addPostAC, UpdateNewPostTextAC} from "./ProfilePageReducer";
 
-export type ActionsTypes =
-    ReturnType<typeof addPostAC>
-    | ReturnType<typeof UpdateNewPostTextAC>
-    | ReturnType<typeof SendMessageAC>
-    | ReturnType<typeof UpdateNewMessageTextAC>
+export type ActionsTypes =  ReturnType<typeof SendMessageAC>
 
 export type DialogType = {
     id: string
@@ -19,7 +14,6 @@ export type MessageType = {
 export type MessagesPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageText: string
 }
 
 let initialState = {
@@ -35,8 +29,7 @@ let initialState = {
         {id: v1(), message: 'Hello'},
         {id: v1(), message: 'Super'},
         {id: v1(), message: 'Yo'},
-    ],
-    newMessageText: ''
+    ]
 }
 
 const MessagesPageReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
@@ -45,11 +38,8 @@ const MessagesPageReducer = (state: MessagesPageType = initialState, action: Act
 
     switch (action.type) {
         case 'SEND-MESSAGE': {
-            const newMessage: MessageType = {id: v1(), message: state.newMessageText};
-            return {...state, newMessageText: '',messages: [...state.messages, newMessage]}
-        }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            return {...state, newMessageText: action.newMessage};
+            const newMessage: MessageType = {id: v1(), message: action.newMessageBody};
+            return {...state, messages: [...state.messages, newMessage]}
         }
         default:
             return state;
@@ -59,15 +49,9 @@ const MessagesPageReducer = (state: MessagesPageType = initialState, action: Act
 
 export default MessagesPageReducer
 
-export const SendMessageAC = () => {
+export const SendMessageAC = (newMessageBody: string) => {
     return {
         type: "SEND-MESSAGE",
-    } as const
-}
-
-export const UpdateNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newMessage: newMessage
+        newMessageBody
     } as const
 }

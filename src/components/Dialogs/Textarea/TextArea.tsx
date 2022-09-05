@@ -1,49 +1,28 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
-import s from './../Dialogs.module.css'
+import React from "react";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {NewMessageFormPropsType} from "../Dialogs";
+import {TextareaCommon} from "../../Common/FormsControls/TextareaCommon";
+import {maxLengthCreator, requiredField} from "../../../utilites/validators";
 
-type textareaPropsType = {
-    newMessageText: string
-    updateNewMessageText: (newMessage: string)=>void
-    sendMessage: ()=>void
-}
-
-const TextArea = (props: textareaPropsType) => {
-
-    let [error, setError] = useState<string>('')
-
-    const NewMessageTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newMessage = e.currentTarget.value;
-        props.updateNewMessageText(newMessage)
-    }
-
-    const sendMessageHandler = () => {
-        if (props.newMessageText !== '') {
-            props.sendMessage()
-        } else {
-            setError('Text is required!')
-        }
-    }
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === 'Enter') {
-            sendMessageHandler();
-        }
-    }
+const max30 = maxLengthCreator(30)
+const TextArea: React.FC<InjectedFormProps<NewMessageFormPropsType>> = (props) => {
 
     return (
         <div>
-            <div>
-            <textarea placeholder={'Enter your message'}
-                      value={props.newMessageText}
-                      onChange={NewMessageTextHandler}
-                      onKeyPress={onKeyPressHandler}
-                      className={error ? s.error : ''}
-            ></textarea>
-            </div>
-            <button onClick={sendMessageHandler}>Send</button>
-            {error && <div className={s.errorMessage}>{error}</div>}
+            <form onSubmit={props.handleSubmit}>
+                <div>
+                    <Field component={TextareaCommon}
+                           name={'newMessageBody'}
+                           placeholder={'Enter your message'}
+                           validate={[requiredField, max30]}/>
+                </div>
+                <button>Send</button>
+            </form>
         </div>
     );
 };
 
-export default TextArea;
+const TextAreaFromRedux = reduxForm<NewMessageFormPropsType>({form: 'dialogAddMessageForm'})(TextArea)
+
+export default TextAreaFromRedux;
 

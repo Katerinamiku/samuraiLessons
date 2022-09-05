@@ -1,46 +1,30 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post'
 
 import {PostsPropsType} from "./MyPostsContainer";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../utilites/validators";
+import {TextareaCommon} from "../../Common/FormsControls/TextareaCommon";
+
+export type NewPostFormPropsType = {
+    NewPostText: string
+}
 
 export const MyPosts = (props: PostsPropsType) => {
 
-    let [error, setError] = useState<string>('')
-
     let postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likes={p.likes}/>)
 
-    let addPostHandler = () => {
-        if (props.newPostText !== '') {
-            props.addPost()
-        } else {
-            setError('Text is required!')
-        }
-    }
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === 'Enter') {
-            addPostHandler();
-        }
+    let addPostHandler = (formData: NewPostFormPropsType) => {
+        props.addPost(formData.NewPostText)
+        formData.NewPostText = '';
     }
 
-    const NewPostTextHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let newText = e.currentTarget.value
-        props.updateNewPostText(newText)
-    }
     return (
         <div className={s.postsBlock}>
             <h3>my posts</h3>
             <div>
-                <div><textarea placeholder={'Meow something'}
-                               value={props.newPostText}
-                               onChange={NewPostTextHandler}
-                               onKeyPress={onKeyPressHandler}
-                               className={error ? s.error : ''}
-                ></textarea></div>
-                <div>
-                    <button onClick={addPostHandler}> Add Post</button>
-                    {error && <div className={s.errorMessage}>{error}</div>}
-                </div>
+                <AddNewPostFromRedux onSubmit={addPostHandler}/>
             </div>
             <div className={s.post}>
                 {postsElements}
@@ -48,3 +32,22 @@ export const MyPosts = (props: PostsPropsType) => {
         </div>
     );
 }
+//-----------------------FORM------------------------------
+
+const max30 = maxLengthCreator(30)
+const AddNewPostForm: React.FC<InjectedFormProps<NewPostFormPropsType>> = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field name={'NewPostText'}
+                       component={TextareaCommon}
+                       placeholder={'Meow something'}
+                       validate={[requiredField, max30]}/>
+            </div>
+            <div>
+                <button> Add Post</button>
+            </div>
+        </form>
+    )
+}
+const AddNewPostFromRedux = reduxForm<NewPostFormPropsType>({form: 'profileAddMessageForm'})(AddNewPostForm)

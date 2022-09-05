@@ -2,15 +2,22 @@ import React from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import TextArea from "./Textarea/TextArea";
 import {DialogsPropsType} from "./DialogsContainer";
+import TextAreaFromRedux from "./Textarea/TextArea";
 
-
+export type NewMessageFormPropsType = {
+    newMessageBody: string
+}
 
 export const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements = props.messagesPage.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
     let messagesElements = props.messagesPage.messages.map(m => <Message message={m.message} key={m.id} id={m.id}/>)
+
+    const addNewMessage = (formData: NewMessageFormPropsType) => {
+        props.sendMessage(formData.newMessageBody)
+        formData.newMessageBody = '';
+    }
 
     return (
         <div className={s.dialogs}>
@@ -20,10 +27,7 @@ export const Dialogs = (props: DialogsPropsType) => {
             <div className={s.messages}>
                 {messagesElements}
             </div>
-            <div><TextArea newMessageText={props.messagesPage.newMessageText}
-                           updateNewMessageText={props.updateNewMessageText}
-                           sendMessage={props.sendMessage}
-            /></div>
+            <div><TextAreaFromRedux  onSubmit={addNewMessage}/></div>
         </div>
     )
 }
