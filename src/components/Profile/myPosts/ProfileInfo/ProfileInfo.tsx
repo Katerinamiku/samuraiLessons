@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../../Common/Preloader/Preloader";
-import {UserProfileType} from "../../../../Redux/ProfilePageReducer";
+import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
 import ProfileStatus from "./ProfileStatus";
 //
 // const BackgroundCover = require('./BGcovering.jpg');

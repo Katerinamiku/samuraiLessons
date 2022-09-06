@@ -2,7 +2,7 @@ import React from 'react';
 import {Profile} from "./Profile";
 import {RootStateType} from "../../Redux/reduxStore";
 import {connect} from "react-redux";
-import {getStatus, getUserProfileInfo, updateStatus, UserProfileType} from "../../Redux/ProfilePageReducer";
+import {getStatus, getUserProfileInfo, updateStatus, UserProfileType} from "../../Redux/reducers/ProfilePageReducer";
 import {withRouter, RouteComponentProps} from "react-router-dom";
 import {compose} from "redux";
 
@@ -14,7 +14,7 @@ class ProfileContainer extends React.Component<commonTypes> {
     componentDidMount() {
         let userId = Number(this.props.match.params.userId);
         if (!userId) {
-            userId = 18304;
+            userId = Number(this.props.authorizedUserId);
         }
         this.props.getUserProfileInfo(userId)
         this.props.getStatus(userId)
@@ -44,6 +44,8 @@ type withRouteType = {
 type mapStateToPropsType = {
     profile: UserProfileType | null
     status: string
+    authorizedUserId: string
+    isAuth: boolean
 }
 type dispatchType = {
     getUserProfileInfo: (id: number) => void
@@ -54,7 +56,9 @@ type dispatchType = {
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 export default compose<React.ComponentType>(

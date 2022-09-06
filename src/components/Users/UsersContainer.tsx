@@ -6,7 +6,7 @@ import {
     setCurrentPage,
     unfollow,
     UsersType
-} from "../../Redux/UsersReducer";
+} from "../../Redux/reducers/UsersReducer";
 import React from "react";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";

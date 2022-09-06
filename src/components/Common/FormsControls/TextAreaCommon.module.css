@@ -8,3 +8,9 @@
 .errorText {
     color: red;
 }
+.formGroupError {
+    border: 1px solid red;
+    padding: 5px;
+    color: #820b0b;
+    width: 150px;
+}
