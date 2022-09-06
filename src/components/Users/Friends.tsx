@@ -1,6 +1,6 @@
 import React from 'react';
 import userAvatar from "../../components/img/userAvatar.png";
-import {UsersType} from "../../Redux/FriendsReducer";
+import {UsersType} from "../../Redux/reducers/FriendsReducer";
 import s from "./Users.module.css";
 
 

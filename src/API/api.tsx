@@ -47,10 +47,13 @@ export const profileAPI = {
 
 export const authAPI = {
     setAuthUserData() {
-        return instance.get(`auth/me`)
+        return instance.get(`auth/me`);
     },
     setLoginData(formData: FormDataType) {
-        return instance.post(`/auth/login`, {email: formData.email, password: formData.password, rememberMe: formData.rememberMe})
+        return instance.post(`/auth/login`, {email: formData.email, password: formData.password, rememberMe: formData.rememberMe});
+    },
+    setLogout() {
+        return instance.delete(`/auth/login`);
     }
 }
 

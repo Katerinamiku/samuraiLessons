@@ -1,11 +1,11 @@
 import {applyMiddleware, combineReducers} from "redux";
-import ProfilePageReducer from "./ProfilePageReducer";
-import MessagesPageReducer from "./MessagesPageReducer";
+import ProfilePageReducer from "./reducers/ProfilePageReducer";
+import MessagesPageReducer from "./reducers/MessagesPageReducer";
 import { legacy_createStore as createStore} from 'redux'
-import {UsersReducer} from "./UsersReducer";
-import authReducer from "./authReducer";
+import {UsersReducer} from "./reducers/UsersReducer";
+import authReducer from "./reducers/authReducer";
 import thunkMiddleware from 'redux-thunk';
-import {friendsReducer} from "./FriendsReducer";
+import {friendsReducer} from "./reducers/FriendsReducer";
 import { reducer as formReducer } from "redux-form";
 
 

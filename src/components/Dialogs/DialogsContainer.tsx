@@ -1,6 +1,6 @@
 import React from "react";
 import {Dialogs} from "./Dialogs";
-import {MessagesPageType, SendMessageAC} from "../../Redux/MessagesPageReducer";
+import {MessagesPageType, SendMessageAC} from "../../Redux/reducers/MessagesPageReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/reduxStore";
 import {compose, Dispatch} from "redux";

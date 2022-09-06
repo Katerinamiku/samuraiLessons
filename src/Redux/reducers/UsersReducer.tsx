@@ -1,4 +1,4 @@
-import {usersAPI} from "../API/api";
+import {usersAPI} from "../../API/api";
 import {Dispatch} from "redux";
 
 type followAT = {

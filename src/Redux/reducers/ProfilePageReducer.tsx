@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {profileAPI, usersAPI} from "../API/api";
+import {profileAPI, usersAPI} from "../../API/api";
 
 //------------Types-------------
 export type ActionsTypes =

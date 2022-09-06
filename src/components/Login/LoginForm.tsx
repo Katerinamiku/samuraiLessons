@@ -2,7 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {InputCommon} from "../Common/FormsControls/TextareaCommon";
 import {requiredField} from "../../utilites/validators";
-
+import s from './../Common/FormsControls/TextAreaCommon.module.css';
 
 export type FormDataType = {
     email: string | null
@@ -14,6 +14,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
     return (
         <div>
             <form onSubmit={props.handleSubmit}>
+                {props.error && <div className={s.formGroupError}>
+                    {props.error}
+                </div>}
                 <div>
                     <Field placeholder={'Email'}
                            component={InputCommon}
@@ -21,7 +24,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                            validate={[requiredField]}/>
                 </div>
                 <div>
-                    <Field placeholder={'Password'}
+                    <Field type={'password'}
+                           placeholder={'Password'}
                            component={InputCommon}
                            name={'password'}
                            validate={[requiredField]}/>
