@@ -10,7 +10,6 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
 //положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
@@ -104,5 +103,5 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
 // }
 
 export default compose<React.ComponentType>(connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, getUsers}),
-    withAuthRedirect) (UsersContainer);
+    {follow, unfollow, setCurrentPage, getUsers})
+) (UsersContainer);

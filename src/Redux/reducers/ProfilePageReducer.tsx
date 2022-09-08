@@ -1,9 +1,10 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../../API/api";
+import {AppThunkType} from "../reduxStore";
 
 //------------Types-------------
-export type ActionsTypes =
+export type ProfilePageActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
@@ -54,7 +55,7 @@ export let initialState = {
 }
 
 //в редьюсере копируем глубоко только то что меняем
-export const ProfilePageReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+export const ProfilePageReducer = (state: ProfilePageType = initialState, action: ProfilePageActionsTypes): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostType = {id: v1(), message: action.NewPostText, likes: 0};
@@ -94,24 +95,24 @@ export const setStatus = (status: string) => {
     } as const
 }
 //---------Thunk--------------
-export const getUserProfileInfo = (id: number) => {
-    return (dispatch: Dispatch) => {
+export const getUserProfileInfo = (id: number): AppThunkType => {
+    return (dispatch) => {
         usersAPI.getUserProfileInfo(id)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
     }
 }
-export const getStatus = (id: number) => {
-    return (dispatch: Dispatch) => {
+export const getStatus = (id: number): AppThunkType => {
+    return (dispatch) => {
         profileAPI.getStatus(id)
             .then(response => {
                 dispatch(setStatus(response.data));
             });
     }
 }
-export const updateStatus = (status: string) => {
-    return (dispatch: Dispatch) => {
+export const updateStatus = (status: string): AppThunkType => {
+    return (dispatch) => {
         profileAPI.updateStatus(status)
             .then(response => {
                 if (response.data.resultCode === 0) {
