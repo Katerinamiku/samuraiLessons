@@ -1,7 +1,7 @@
 import {v1} from "uuid";
 
 
-export type ActionsTypes =  ReturnType<typeof SendMessageAC>
+export type MessagesPageActionsTypes =  ReturnType<typeof SendMessageAC>
 
 export type DialogType = {
     id: string
@@ -32,7 +32,7 @@ let initialState = {
     ]
 }
 
-const MessagesPageReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
+const MessagesPageReducer = (state: MessagesPageType = initialState, action: MessagesPageActionsTypes): MessagesPageType => {
     //делаем копию стейта и копиб только того массива который будет меняться: dialogs не надо, и не надо сами
     // обьекты Messages, так как все что мы здесь меняем - это добавляем новое в messages
 

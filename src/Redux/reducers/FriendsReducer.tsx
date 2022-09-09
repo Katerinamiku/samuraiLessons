@@ -3,7 +3,7 @@ type setFriendsAT = {
     type: "SET_FRIENDS"
     friends: Array<UsersType>
 }
-export type ActionsTypes = setFriendsAT;
+export type FriendsActionsTypes = setFriendsAT;
 
 export type LocationType = {
     city: string
@@ -29,7 +29,7 @@ export let initialState = {
     friends: [],
 };
 
-export const friendsReducer = (state: FriendsPageType = initialState, action: ActionsTypes): FriendsPageType => {
+export const friendsReducer = (state: FriendsPageType = initialState, action: FriendsActionsTypes): FriendsPageType => {
     switch (action.type) {
         case "SET_FRIENDS":
             return {

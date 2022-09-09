@@ -10,24 +10,20 @@ import {
 import React from "react";
 import {Users} from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsersState
+} from "../../Redux/reducers/usersSelectors";
 
-//положили всю контейнерную логику в одни файл - конт комп. получилось 2 конт комп: одна connect другая классовая
 class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
-        // this.props.toggleIsFetching(true);
-        //
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         this.props.setUsers(data.items);
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setTotalCount(data.totalCount);
-        //     }); - вместо сайд  запускаем thunk
     }
-
     onPageChanged = (page: number) => {
         this.props.getUsers(page, this.props.pageSize);
     }
@@ -67,42 +63,15 @@ export type UsersPropsType = mapStateToPropsType & dispatchToPropsType;
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersState(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
-//запретим видеть Users неавторизованным добавим withAuthRedirect
-
-//можно вместо mapDispatchtoprops сразу передать в connect обьект cо ссфлками на экшн криэйьеры
-//а также можно переименовать экшн криэйторы без АС и тогда сократиться запись
-// const dispatchToProps = (dispatch: Dispatch): dispatchToPropsType => {
-//     return {
-//         follow: (userId: string) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: string) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users: Array<UsersType>) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (page: number) => {
-//             dispatch(setCurrentPageAC(page))
-//         },
-//         setTotalCount: (totalCount: number) => {
-//             dispatch(setTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (value: boolean) => {
-//             dispatch(toggleIsFetchingAC(value))
-//         }
-//     }
-// }
-
 export default compose<React.ComponentType>(connect(mapStateToProps,
-    {follow, unfollow, setCurrentPage, getUsers}),
-    withAuthRedirect) (UsersContainer);
+    {follow, unfollow, setCurrentPage, getUsers})
+) (UsersContainer);

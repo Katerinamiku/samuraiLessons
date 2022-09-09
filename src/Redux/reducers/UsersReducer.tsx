@@ -1,44 +1,7 @@
 import {usersAPI} from "../../API/api";
 import {Dispatch} from "redux";
 
-type followAT = {
-    type: 'FOLLOW'
-    id: number
-}
-type unfollowAT = {
-    type: 'UNFOLLOW'
-    id: number
-}
-type setUsersAT = {
-    type: 'SET_USERS'
-    users: Array<UsersType>
-}
-type setCurrentPageAT = {
-    type: 'SET_CURRENT_PAGE'
-    page: number
-}
-type setTotalCountAT = {
-    type: 'SET_TOTAL_COUNT',
-    totalCount: number
-}
-type toggleIsFetchingAT = {
-    type: 'TOGGLE_IS_FETCHING'
-    value: boolean
-}
-type toggleFollowingInProgressAT = {
-    type: 'TOGGLE_FOLLOWING_IN_PROGRESS'
-    value: boolean
-    id: number
-}
-
-export type ActionsTypes =
-    followAT
-    | unfollowAT
-    | setUsersAT
-    | setCurrentPageAT
-    | setTotalCountAT
-    | toggleIsFetchingAT
-    | toggleFollowingInProgressAT
+export type UsersReducerActionsTypes =  ReturnType<typeof followSuccess> | ReturnType<typeof unfollowSuccess> |ReturnType<typeof setUsers> |ReturnType<typeof setCurrentPage> |ReturnType<typeof setTotalCount> |ReturnType<typeof toggleIsFetching> |ReturnType<typeof toggleFollowingInProgress>
 
 export type LocationType = {
     city: string
@@ -74,7 +37,7 @@ export let initialState = {
     followingInProgress: []
 };
 //в редьюсере копируем глубоко только то что меняем
-export const UsersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
+export const UsersReducer = (state: UsersPageType = initialState, action: UsersReducerActionsTypes): UsersPageType => {
     switch (action.type) {
         case 'FOLLOW':
             return {
@@ -114,48 +77,48 @@ export const UsersReducer = (state: UsersPageType = initialState, action: Action
 }
 
 //action creators
-export const followSuccess = (id: number): followAT => {
+export const followSuccess = (id: number) => {
     return {
         type: 'FOLLOW',
         id
-    }
+    } as const
 }
-export const unfollowSuccess = (id: number): unfollowAT => {
+export const unfollowSuccess = (id: number) => {
     return {
         type: 'UNFOLLOW',
         id
-    }
+    } as const
 }
-export const setUsers = (users: Array<UsersType>): setUsersAT => {
+export const setUsers = (users: Array<UsersType>) => {
     return {
         type: 'SET_USERS',
         users
-    }
+    } as const
 }
-export const setCurrentPage = (page: number): setCurrentPageAT => {
+export const setCurrentPage = (page: number) => {
     return {
         type: 'SET_CURRENT_PAGE',
         page
-    }
+    } as const
 }
-export const setTotalCount = (totalCount: number): setTotalCountAT => {
+export const setTotalCount = (totalCount: number) => {
     return {
         type: 'SET_TOTAL_COUNT',
         totalCount
-    }
+    } as const
 }
-export const toggleIsFetching = (value: boolean): toggleIsFetchingAT => {
+export const toggleIsFetching = (value: boolean) => {
     return {
         type: 'TOGGLE_IS_FETCHING',
         value
-    }
+    } as const
 }
-export const toggleFollowingInProgress = (value: boolean, id: number): toggleFollowingInProgressAT => {
+export const toggleFollowingInProgress = (value: boolean, id: number) => {
     return {
         type: 'TOGGLE_FOLLOWING_IN_PROGRESS',
         value,
         id
-    }
+    } as const
 }
 
 
@@ -163,7 +126,7 @@ export const toggleFollowingInProgress = (value: boolean, id: number): toggleFol
 export const getUsers = (currentPage: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(toggleIsFetching(true));
-
+        dispatch(setCurrentPage(currentPage));
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
                 dispatch(setUsers(data.items));
