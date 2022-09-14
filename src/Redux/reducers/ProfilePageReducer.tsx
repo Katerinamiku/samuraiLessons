@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../../API/api";
 import {AppThunkType} from "../reduxStore";
 
@@ -51,7 +50,7 @@ export let initialState = {
         {id: v1(), message: 'bebebe', likes: 11},
     ],
     profile: null,
-    status: ' '
+    status: 'Write something'
 }
 
 //в редьюсере копируем глубоко только то что меняем
