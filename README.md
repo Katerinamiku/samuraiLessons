@@ -1,11 +1,11 @@
 # Social media App 'IT-Cats'
 
-Simple social media app on React. In progress.
+Simple social media app on React. Development still in progress.
 
 ## Features
 
-App is based on social network API ('https://social-network.samuraijs.com/').
-Login page, user profile page, friends, messages, music page are realized in App with different tools and instruments.
+App is based on social network API ('https://social-network.samuraijs.com/') with CORS. 
+<br/>Login page, user profile page, friends, messages, music page are realized in App with different tools and instruments.
 
 ## Used technologies & tools
 
@@ -19,7 +19,8 @@ Login page, user profile page, friends, messages, music page are realized in App
 ## Demo
 
 Demo version is avaliable
-GithubPages:  
+Heroku:   https://social-network-itcats.herokuapp.com/
+<br/>Please, for login use instructions, described on login page.
 
 ## Usage
 
