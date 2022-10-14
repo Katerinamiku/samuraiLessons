@@ -1,6 +1,6 @@
 # Social media App 'IT-Cats'
 
-Simple social media app on React. Development still in progress.
+Social media app on React. Development still in progress.
 
 ## Features
 
@@ -19,7 +19,7 @@ App is based on social network API ('https://social-network.samuraijs.com/') wit
 ## Demo
 
 Demo version is avaliable
-Heroku:   https://social-network-itcats.herokuapp.com/
+on GitHubPages:   https://katerinamiku.github.io/samuraiLessons
 <br/>Please, for login use instructions, described on login page.
 
 ## Usage
