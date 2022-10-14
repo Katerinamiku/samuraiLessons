@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/samuraiLessons/static/css/main.b4b86fe0.css",
-    "main.js": "/samuraiLessons/static/js/main.f4c3c924.js",
+    "main.js": "/samuraiLessons/static/js/main.b5f7b2eb.js",
     "static/media/testimonial-2.jpg": "/samuraiLessons/static/media/testimonial-2.b71aaae3dc09df2c0ff1.jpg",
     "static/media/logoS.jpg": "/samuraiLessons/static/media/logoS.650f06a8aacabb8b318a.jpg",
     "static/media/userAvatar.png": "/samuraiLessons/static/media/userAvatar.bdab0620c94e33bdf401.png",
     "static/media/preloader.svg": "/samuraiLessons/static/media/preloader.b767aab46ea3fa309aff5e12d5006915.svg",
     "index.html": "/samuraiLessons/index.html",
     "main.b4b86fe0.css.map": "/samuraiLessons/static/css/main.b4b86fe0.css.map",
-    "main.f4c3c924.js.map": "/samuraiLessons/static/js/main.f4c3c924.js.map"
+    "main.b5f7b2eb.js.map": "/samuraiLessons/static/js/main.b5f7b2eb.js.map"
   },
   "entrypoints": [
     "static/css/main.b4b86fe0.css",
-    "static/js/main.f4c3c924.js"
+    "static/js/main.b5f7b2eb.js"
   ]
 }
