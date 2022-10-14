@@ -1,6 +1,7 @@
-# Social media App 'IT-Cats'
+# Social network App 'IT-Cats'
 
-Social media app on React. Development still in progress.
+Social network app on React. Basic social network functionality such as login/logout, pagination, profile page, friends, messages.
+<br/>Development still in progress.
 
 ## Features
 
