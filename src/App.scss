@@ -1,0 +1,22 @@
+
+.appWrapper {
+    background-color: #fdd8ba;
+    background-image: url('../src/common/bgCats.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    position: relative;
+    z-index: 0;
+    .appMain {
+        display: flex;
+        margin: 10px;
+    }
+    .appWrapperContent {
+        margin-left: 50px;
+    }
+}
+

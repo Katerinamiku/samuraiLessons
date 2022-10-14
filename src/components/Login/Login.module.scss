@@ -1,0 +1,47 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+
+.loginBlock {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 450px;
+  background-color: #d08804;
+  background-image: url('../../common/bgLogin.png');
+  border: none;
+  border-radius: 15px;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    @include text($mainFontFamily, 28px, 700, 1rem, $textSecondaryColor);
+  }
+
+  .loginText {
+    width: 250px;
+    margin: 15px;
+    @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textSecondaryColor);
+
+    a {
+      color: $primaryColor;
+    }
+  }
+
+  .formStyle {
+    @include text($regularTextFontFamily, 16px, 400, 1rem, $textSecondaryColor);
+
+    input {
+      margin: 4px;
+
+      @include text($regularTextFontFamily, 14px, 400, 1.2rem, $textSecondaryColor);
+    }
+  }
+}
+

@@ -1,9 +1,10 @@
 import React from 'react';
-import s from './ProfileInfo.module.css'
+import s from './ProfileInfo.module.scss'
 import Preloader from "../../../Common/Preloader/Preloader";
 import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileStatusHooks} from "./ProfileStatusHooks";
+import userAvatar from "../../../../common/userAvatar.png";
 //
 // const BackgroundCover = require('./BGcovering.jpg');
 
@@ -18,18 +19,15 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         return <Preloader/>
     }
     return (
-        <div>
-            <div>
-                {/*<img src={BackgroundCover} alt='background cover'/>*/}
-            </div>
+        <div className={s.profileInfoContainer}>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large}/>
-            </div>
-            <div>
-                {/*<ProfileStatus status={props.status}*/}
-                {/*               updateStatus={props.updateStatus}/>*/}
-                <ProfileStatusHooks status={props.status}
-                                    updateStatus={props.updateStatus}/>
+                <img src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar}/>
+                <div className={s.status}>
+                    {/*<ProfileStatus status={props.status}*/}
+                    {/*               updateStatus={props.updateStatus}/>*/}
+                    <ProfileStatusHooks status={props.status}
+                                        updateStatus={props.updateStatus}/>
+                </div>
             </div>
             <div>
                 <div>{`${props.profile.fullName}`}</div>

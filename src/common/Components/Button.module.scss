@@ -1,0 +1,31 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.btn {
+  margin: 10px;
+  @include text($mainFontFamily, 22px, 700, 1.5rem, $textSecondaryColor);
+  padding: 6px 15px 8px 15px;
+  outline: 0;
+  border: 1px solid #966002;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  &:after {
+    content: "";
+    background-color: #e4b58b;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 7px;
+    left: 7px;
+    transition: 0.2s;
+  }
+  &:hover:after {
+    top: 0px;
+    left: 0px;
+  }
+}

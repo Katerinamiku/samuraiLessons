@@ -1,8 +1,9 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {InputCommon} from "../Common/FormsControls/TextareaCommon";
+import style from './Login.module.scss';
 import {requiredField} from "../../utilites/validators";
 import s from './../Common/FormsControls/TextAreaCommon.module.css';
+import {Button} from "../../common/Components/Button";
 
 export type FormDataType = {
     email: string | null
@@ -12,22 +13,22 @@ export type FormDataType = {
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
     return (
-        <div>
+        <div className={style.formStyle}>
             <form onSubmit={props.handleSubmit}>
                 {props.error && <div className={s.formGroupError}>
                     {props.error}
                 </div>}
                 <div>
                     <Field placeholder={'Email'}
-                           component={InputCommon}
+                           component={'input'}
                            name={'email'}
                            validate={[requiredField]}/>
                 </div>
                 <div>
-                    <Field type={'password'}
-                           placeholder={'Password'}
-                           component={InputCommon}
+                    <Field placeholder={'Password'}
+                           component={'input'}
                            name={'password'}
+                           type="password"
                            validate={[requiredField]}/>
                 </div>
                 <div>
@@ -36,7 +37,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                            name={'rememberMe'}/> remember me
                 </div>
                 <div>
-                    <button>Login</button>
+                    <Button name={'Log in'} callBack={()=>{
+                        }}/>
                 </div>
             </form>
         </div>
