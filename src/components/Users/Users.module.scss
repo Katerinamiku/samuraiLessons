@@ -1,0 +1,62 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+
+.userWindow {
+  display: flex;
+  background-color: $bgPrimaryColor;
+  flex-direction: column;
+  width: 702px;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+  position: relative;
+  z-index: 1;
+
+  .pagination {
+    padding: 5px;
+    @include text($titleFontFamily, 18px, 400, 1.5rem, $textColor);
+  }
+
+  .userInfo {
+    display: flex;
+    flex-direction: row;
+    margin: 15px;
+
+    .avatarWindow {
+      margin-right: 15px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+width: 90px;
+      .avatar {
+        width: 70px;
+        border-radius: 50%;
+      }
+    }
+    .userDescription {
+      display: flex;
+      flex-direction: column;
+      .name {
+        margin-bottom: 5px;
+        margin-top: 8px;
+        @include text($mainFontFamily, 22px, 700, 1.5rem, $textColor);
+      }
+      .status {
+        margin-top: 4px;
+        @include text($titleFontFamily, 22px, 700, 1rem, $textColor);
+      }
+      .location {
+        margin-top: 10px;
+        @include text($regularTextFontFamily, 14px, 400, 1rem, $primaryColor);
+      }
+    }
+  }
+}
+
+
+.selectedPage {
+  font-weight: bold;
+}

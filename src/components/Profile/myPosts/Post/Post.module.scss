@@ -1,0 +1,28 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+
+.item {
+  display: flex;
+  margin: 5px;
+  align-items: center;
+  @include text($regularTextFontFamily, 16px, 400, 1.2rem, $textColor);
+  img {
+    width: 50px;
+    border-radius: 30px;
+    margin-right: 10px;
+  }
+  .messageBody {
+    .messageAttributes {
+      display: flex;
+      justify-content: space-between;
+      @include text($regularTextFontFamily, 12px, 700, 1.2rem, $textColor);
+    }
+    .deleteIcon {
+      width: 15px;
+      height:17px;
+      margin-left: 10px;
+      color: #57bbb2;
+    }
+  }
+}

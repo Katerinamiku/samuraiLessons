@@ -21,10 +21,10 @@ export const Header = (props: HeaderType) => {
                 {props.isAuth
                     ? <div className={s.loginName}>
                         {props.login}
-                        <Button callBack={props.setLogout} name={'Log out'}/>
+                        <Button callBack={props.setLogout} name={'Log out'} size={'large'}/>
                         </div>
                     : <NavLink to={'/login'}>
-                        <Button callBack={()=>{}} name={'Log in'}/>
+                        <Button callBack={()=>{}} name={'Log in'}  size={'large'}/>
                     </NavLink>
                 }
             </div>

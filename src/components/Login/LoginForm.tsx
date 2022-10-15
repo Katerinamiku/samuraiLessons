@@ -38,7 +38,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                 </div>
                 <div>
                     <Button name={'Log in'} callBack={()=>{
-                        }}/>
+                        }}  size={'large'}/>
                 </div>
             </form>
         </div>

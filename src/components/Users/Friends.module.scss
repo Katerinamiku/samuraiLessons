@@ -1,0 +1,52 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.friendsTitle {
+  text-align: center;
+  margin: 10px;
+  @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
+}
+
+.friendsBlock {
+  display: flex;
+  background-color: $bgPrimaryColor;
+  flex-direction: column;
+  width: 702px;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+
+  .friendsList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .friendItem {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      margin: 10px;
+      width: 300px;
+
+      img {
+        width: 80px;
+        border-radius: 50%;
+        margin: 10px;
+      }
+
+      .friendDescription {
+        .name {
+          margin-bottom: 5px;
+          margin-top: 25px;
+          @include text($mainFontFamily, 22px, 700, 1.5rem, $textColor);
+        }
+
+        .status {
+          @include text($titleFontFamily, 22px, 700, 1rem, $textColor);
+        }
+      }
+    }
+  }
+
+}

@@ -29,3 +29,31 @@
     left: 0px;
   }
 }
+.btnSmall {
+  margin: 7px;
+  @include text($mainFontFamily, 16px, 700, 1rem, $textSecondaryColor);
+  padding: 3px 7px 4px 7px;
+  outline: 0;
+  border: 1px solid #966002;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  &:after {
+    content: "";
+    background-color: #e4b58b;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 4px;
+    left: 4px;
+    transition: 0.2s;
+  }
+  &:hover:after {
+    top: 0px;
+    left: 0px;
+  }
+}

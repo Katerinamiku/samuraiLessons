@@ -1,24 +1,34 @@
 import React from 'react';
-import s from './Post.module.css'
+import s from './Post.module.scss'
+import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
+import userAvatar from "../../../../common/userAvatar.png";
+import Preloader from "../../../Common/Preloader/Preloader";
 
-const UserAvatar = require('./testimonial-2.jpg');
+const deleteIcon = require('../../../../common/delete.png');
 
 type MessageType = {
     id: string
     message: string
     likes: number
+    profile: UserProfileType | null
 }
-export const Post = (props:MessageType) => {
+export const Post = (props: MessageType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    } else {
+        return (
+            <div key={props.id} className={s.item}>
+                <img src={props.profile.photos.small != null ? props.profile.photos.small : userAvatar} alt={'user' +
+                    ' avatar'}/>
+                <div className={s.messageBody}>
+                    <div> {props.message}</div>
+                    <div className={s.messageAttributes}>
+                        <span>{props.likes !== 1 ? props.likes + ' likes' : props.likes + ' like'}</span>
+                        <img className={s.deleteIcon} src={deleteIcon} alt='delete'/>
+                    </div>
 
-    return (
-        <div key={props.id} className={s.item}>
-            <img src={UserAvatar} alt='ava'/>
-            {props.message}
-            <div>
-                <span>{props.likes}</span>
-                <span> like</span>
-                <span> cancel</span>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }

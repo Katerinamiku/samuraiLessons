@@ -1,0 +1,38 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+
+.postsBlock {
+  margin-left: 40px;
+
+  .title {
+    margin-bottom: 20px;
+    @include text($mainFontFamily, 36px, 700, 2rem, $textColor);
+  }
+
+  .post {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .postInput {
+    textarea {
+      border: 1px solid $textSecondaryColor;
+      border-radius: 8px;
+      width: 200px;
+      padding: 5px;
+      @include text($regularTextFontFamily, 14px, 400, 1.2rem, $textSecondaryColor);
+    }
+  }
+}
+
+
+.error {
+  border: #a00a0a 1px solid;
+}
+
+.errorMessage {
+  @include text($mainFontFamily, 14px, 400, 1.2rem, #A00A0AFF);
+}

@@ -6,14 +6,16 @@
   height: 110px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   .logo {
-    width: 130px;
+    width: 110px;
     border: solid white 2px;
     border-radius: 60%;
     margin-left: 20px;
-    margin-top: 50px;
+    margin-top: 30px;
+    margin-right: 30px;
+
     @media screen and (max-width: 645px) {
       width: 80px;
     }
@@ -35,6 +37,7 @@
 
   .loginBlock {
     margin-right: 30px;
+    margin-left: 50px;
   }
 
   .loginName {

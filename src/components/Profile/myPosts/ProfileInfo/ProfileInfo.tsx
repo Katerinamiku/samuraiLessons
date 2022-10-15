@@ -5,8 +5,7 @@ import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileStatusHooks} from "./ProfileStatusHooks";
 import userAvatar from "../../../../common/userAvatar.png";
-//
-// const BackgroundCover = require('./BGcovering.jpg');
+import {Field} from "redux-form";
 
 type ProfileInfoType = {
     profile: UserProfileType | null
@@ -15,27 +14,52 @@ type ProfileInfoType = {
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
+
+    // let inputs = props.profile.contacts && Object.keys(props.profile.contacts).map((key) => {
+    //     return <div key={key}>
+    //         <label>
+    //             <Field type="input" component={'input'} name={'contacts.' + key} key={key}/>
+    //             {key}
+    //         </label>
+    //     </div>
+    // })
+
     if (!props.profile) {
         return <Preloader/>
-    }
+    } else {
     return (
         <div className={s.profileInfoContainer}>
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar}/>
+                <img src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar} alt={'user' +
+                    ' avatar'}/>
                 <div className={s.status}>
+                    <div className={s.profileName}>{`${props.profile.fullName}`}</div>
                     {/*<ProfileStatus status={props.status}*/}
                     {/*               updateStatus={props.updateStatus}/>*/}
                     <ProfileStatusHooks status={props.status}
                                         updateStatus={props.updateStatus}/>
                 </div>
             </div>
-            <div>
-                <div>{`${props.profile.fullName}`}</div>
+            <div className={s.profileInfo}>
                 <div>About me: {props.profile.aboutMe && `${props.profile.aboutMe}`} </div>
                 <div>Looking for a
-                    job: {props.profile.lookingForAJobDescription && `${props.profile.lookingForAJobDescription}`}</div>
-                <div>Contact me: {props.profile.contacts && `${Object.keys(props.profile.contacts)}`}</div>
+                    job:
+                    <div>{props.profile.lookingForAJobDescription && `${props.profile
+                        .lookingForAJobDescription}`}</div>
+
+                    </div>
+                <div>Contact me:
+                    <ul className={s.contacts}>
+                            <li>{props.profile.contacts.github} Github</li>
+                            <li>{props.profile.contacts.facebook}Facebook</li>
+                            <li>{props.profile.contacts.mainLink}Email</li>
+
+                        {/*{props.profile.contacts && `${Object.keys(props.profile.contacts)}`}*/}
+                        {/*{inputs}*/}
+                    </ul>
+                </div>
             </div>
         </div>
     );
+}
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPostAC, PostType} from "../../../Redux/reducers/ProfilePageReducer"
+import {addPostAC, PostType, UserProfileType} from "../../../Redux/reducers/ProfilePageReducer"
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {RootStateType} from "../../../Redux/reduxStore";
@@ -10,6 +10,7 @@ import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
     posts: Array<PostType>
+    profile: UserProfileType | null
 }
 type DispatchToPropsType = {
     addPost: (NewPostText: string) => void
@@ -20,6 +21,7 @@ export type  PostsPropsType =  MapStateToPropsType & DispatchToPropsType
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
     return {
         posts: state.profilePage.posts,
+        profile: state.profilePage.profile
     }
 }
 const dispatchToProps = (dispatch: Dispatch): DispatchToPropsType => {
