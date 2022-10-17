@@ -3,7 +3,7 @@
 Social network app on React. Basic social network functionality such as login/logout, pagination, profile page, friends, messages.
 <br/>Development still in progress.
 
-<img src="https://imgur.com/JwmB1Rn" height="300"/>
+<img src="https://imgur.com/JwmB1Rn.png" height="300"/>
 
 ## Features
 
