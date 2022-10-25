@@ -1,0 +1,48 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.header {
+  min-width: 100%;
+  height: 110px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .logo {
+    width: 110px;
+    border: solid white 2px;
+    border-radius: 60%;
+    margin-left: 20px;
+    margin-top: 30px;
+    margin-right: 30px;
+
+    @media screen and (max-width: 645px) {
+      width: 80px;
+    }
+  }
+  .greeting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    @include text($titleFontFamily, 32px, 700, 1.5rem, $textColor);
+
+    img {
+      width: 50px;
+    }
+    @media screen and (max-width: 850px) {
+      margin-left: 50px;
+    }
+  }
+
+  .loginBlock {
+    margin-right: 30px;
+    margin-left: 50px;
+  }
+
+  .loginName {
+    @include text($titleFontFamily, 22px, 700, 1rem, $textColor);
+  }
+}
+
+

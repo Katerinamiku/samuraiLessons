@@ -1,0 +1,60 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.profileInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 450px;
+  height: 450px;
+  background-color: #d08804;
+  background-image: url('../../../../common/images/profileBg.png');
+  border: none;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 30px;
+
+  .descriptionBlock {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+
+    img {
+      width: 120px;
+      border: solid white 2px;
+      border-radius: 60%;
+      @media screen and (max-width: 645px) {
+        width: 80px;
+      }
+    }
+    .status {
+      @include text($titleFontFamily, 26px, 400, 2rem, $textColor);
+      padding-left: 20px;
+      .profileName {
+        @include text($mainFontFamily, 30px, 700, 2rem, $textColor);
+      }
+    }
+  }
+  .profileInfo {
+    display:flex;
+    width: 400px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+    @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textColor);
+
+    .contacts {
+      display: flex;
+      flex-direction: column;
+
+    }
+  }
+
+}
+
+

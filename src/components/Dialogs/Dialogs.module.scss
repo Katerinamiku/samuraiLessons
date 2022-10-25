@@ -1,0 +1,99 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.dialogs {
+  display: flex;
+
+  .friendsBlock {
+    display: flex;
+    flex-direction: column;
+    margin-right: 42px;
+    background-color: #eefbfa;
+    width: 210px;
+    height: 370px;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 4px 7px 12px -3px #0b0000;
+
+    .dialogFriends {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 10px;
+
+      a {
+        padding-left: 5px;
+        text-decoration: none;
+        border: none;
+        @include text($mainFontFamily, 21px, 700, 1.5rem, $textColor);
+
+        &:active {
+          color: #57bbb2;
+        }
+      }
+
+      img {
+        width: 50px;
+        border-radius: 30px;
+
+      }
+    }
+
+  }
+
+  .messageBlock {
+    display: flex;
+    flex-direction: column;
+
+    .messages {
+      width: 450px;
+      height: 300px;
+      background-color: #fee7da;
+      border: none;
+      border-radius: 10px;
+      box-sizing: border-box;
+      box-shadow: 4px 7px 12px -3px #0b0000;
+      padding: 15px;
+      padding-bottom: 30px;
+      margin-bottom: 20px;
+
+      .message {
+        @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textSecondaryColor);
+        background-color: #f5f0ee;
+        border: none;
+        border-radius: 10px;
+        box-sizing: border-box;
+        box-shadow: 2px 5px 8px -3px #0b0000;
+        margin: 11px;
+        padding: 5px;
+      }
+    }
+
+    .messageInput {
+      .messageForm {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        textarea {
+          border: 1px solid $textSecondaryColor;
+          border-radius: 8px;
+          width: 300px;
+          padding: 5px;
+          margin-right: 10px;
+          @include text($regularTextFontFamily, 14px, 400, 1.2rem, $textSecondaryColor);
+        }
+      }
+    }
+  }
+}
+
+
+.error {
+  border: red 1px solid;
+}
+
+.errorMessage {
+  color: red;
+}

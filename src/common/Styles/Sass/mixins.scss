@@ -1,0 +1,32 @@
+@import "./variables";
+
+@mixin text($fontFamily, $fontSize, $fontWeight, $lineHeight, $color) {
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+  color: $color;
+}
+
+@mixin tagBefore($content, $top, $left) {
+  content: $content;
+  font-family: 'La Belle Aurore', cursive;
+  color: #515152;
+  font-size: 18px;
+  position: absolute;
+  top: $top;
+  left: $left;
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+@mixin tagAfter($content, $left, $bottom) {
+  content: $content;
+  font-family: 'La Belle Aurore', cursive;
+  color: #515152;
+  font-size: 18px;
+  position: absolute;
+  left: $left;
+  bottom: $bottom;
+  letter-spacing: 4px;
+  font-weight: 400;
+}

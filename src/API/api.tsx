@@ -11,7 +11,7 @@ const instance = axios.create({
 })
 //сделаем обьект c методами, где обьединим все для удобства работы с эндпоинтами
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10) {
+    getUsers(currentPage = 1, pageSize = 5) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`, {}).then(response => {
             return response.data
         })
@@ -26,8 +26,8 @@ export const usersAPI = {
         console.warn('Obsolete method. Please use profileAPI object')
         return profileAPI.getUserProfileInfo(id)
     },
-    getFriends() {
-        return instance.get('https://social-network.samuraijs.com/api/1.0/users?friend=true').then(response => {
+    getFriends(currentPage = 1, pageSize = 10) {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`).then(response => {
             return response.data
         })
     }

@@ -1,0 +1,17 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.musicWindow {
+  display: flex;
+  width: 702px;
+  height: 250px;
+  background-color: $bgPrimaryColor;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+  .musicTitle {
+    @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
+  }
+}

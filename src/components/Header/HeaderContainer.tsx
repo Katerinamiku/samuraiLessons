@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {setLogout} from "../../Redux/reducers/authReducer";
 import {RootStateType} from "../../Redux/reduxStore";
 
-const Logo = require('../img/logoS.jpg');
 
 class HeaderContainer extends React.Component<HeaderPropsType> {
 

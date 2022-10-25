@@ -1,0 +1,41 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+
+  .navBlock {
+    margin: 40px;
+    margin-left: 30px;
+
+    .item a {
+      @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
+      text-decoration: none;
+    }
+
+    a.active {
+      color: $activeColor;
+    }
+  }
+
+  .logoBlock {
+    display: flex;
+    justify-content: flex-start;
+
+    .logo {
+      width: 120px;
+      border: solid white 2px;
+      border-radius: 60%;
+      @media screen and (max-width: 645px) {
+        width: 80px;
+      }
+    }
+  }
+
+}
+
+
+
+

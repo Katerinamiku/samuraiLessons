@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Dialogs.module.css'
+import s from './Dialogs.module.scss'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
@@ -21,13 +21,16 @@ export const Dialogs = (props: DialogsPropsType) => {
 
     return (
         <div className={s.dialogs}>
-            <div className={s.dialogsItems}>
+            <div className={s.friendsBlock}>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
-                {messagesElements}
+            <div className={s.messageBlock}>
+                <div className={s.messages}>
+                    {messagesElements}
+                </div>
+                <div className={s.messageInput}><TextAreaFromRedux onSubmit={addNewMessage}/></div>
             </div>
-            <div><TextAreaFromRedux  onSubmit={addNewMessage}/></div>
+
         </div>
     )
 }

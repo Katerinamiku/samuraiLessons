@@ -73,7 +73,6 @@ export const UsersReducer = (state: UsersPageType = initialState, action: UsersR
         default:
             return state;
     }
-    return state;
 }
 
 //action creators
