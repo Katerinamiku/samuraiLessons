@@ -1,0 +1,22 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.pagination {
+  padding: 15px;
+  @include text($titleFontFamily, 18px, 400, 1.5rem, $textColor);
+
+  span {
+    cursor: pointer;
+    margin: 2px;
+  }
+.pagButtons {
+  @include text($titleFontFamily, 31px, 800, 0.6rem, $textColor);
+}
+  .selectedPage {
+    font-weight: bold;
+    color: #20292a;
+    border-bottom: 1px solid;
+  }
+}
+
+

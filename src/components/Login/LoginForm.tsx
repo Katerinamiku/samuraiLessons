@@ -3,7 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import style from './Login.module.scss';
 import {requiredField} from "../../utilites/validators";
 import s from './../Common/FormsControls/TextAreaCommon.module.css';
-import {Button} from "../../common/Components/Button";
+import {Button} from "../Common/Button/Button";
 
 export type FormDataType = {
     email: string | null

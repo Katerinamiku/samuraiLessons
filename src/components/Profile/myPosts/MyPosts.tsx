@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './MyPosts.module.scss'
 import {Post} from './Post/Post'
-
 import {PostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utilites/validators";
 import {TextareaCommon} from "../../Common/FormsControls/TextareaCommon";
-import {Button} from "../../../common/Components/Button";
+import {Button} from "../../Common/Button/Button";
 import {UserProfileType} from "../../../Redux/reducers/ProfilePageReducer";
 
 export type NewPostFormPropsType = {
@@ -14,8 +13,8 @@ export type NewPostFormPropsType = {
     profile: UserProfileType | null
 }
 
-export const MyPosts = (props: PostsPropsType) => {
-
+export const MyPosts = React.memo(function (props: PostsPropsType) {
+    console.log('render')
     let postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likes={p.likes} profile={props.profile}/>)
 
     let addPostHandler = (formData: NewPostFormPropsType) => {
@@ -34,7 +33,8 @@ export const MyPosts = (props: PostsPropsType) => {
             </div>
         </div>
     );
-}
+});
+
 //-----------------------FORM------------------------------
 
 const max30 = maxLengthCreator(30)
@@ -42,7 +42,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<NewPostFormPropsType>> = (props
     return (
         <div className={s.postInput}>
             <form onSubmit={props.handleSubmit}>
-                <div >
+                <div>
                     <Field name={'NewPostText'}
                            component={TextareaCommon}
                            placeholder={'Meow something'}
@@ -50,7 +50,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<NewPostFormPropsType>> = (props
                 </div>
                 <div>
                     <Button name={'Add post'} callBack={() => {
-                    }}  size={'large'}/>
+                    }} size={'large'}/>
                 </div>
             </form>
         </div>

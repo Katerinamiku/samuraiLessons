@@ -1,7 +1,7 @@
 import React from "react";
 import s from '../Dialogs.module.scss'
 import {NavLink} from "react-router-dom";
-import userAvatar from "../../../common/userAvatar.png";
+import userAvatar from "../../../common/images/userAvatar.png";
 type DialogItemType = {
     name: string
     id: string

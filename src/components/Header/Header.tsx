@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Header.module.scss';
 import {NavLink} from "react-router-dom";
-import {Button} from "../../common/Components/Button";
-const Logo = require('../../common/logo.png');
+import {Button} from "../Common/Button/Button";
+const Logo = require('../../common/images/logo.png');
 
 type HeaderType = {
     isAuth: boolean
@@ -20,7 +20,7 @@ export const Header = (props: HeaderType) => {
             <div className={s.loginBlock}>
                 {props.isAuth
                     ? <div className={s.loginName}>
-                        {props.login}
+                        Hi, {props.login}!
                         <Button callBack={props.setLogout} name={'Log out'} size={'large'}/>
                         </div>
                     : <NavLink to={'/login'}>

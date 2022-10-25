@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './Post.module.scss'
 import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
-import userAvatar from "../../../../common/userAvatar.png";
+import userAvatar from "../../../../common/images/userAvatar.png";
 import Preloader from "../../../Common/Preloader/Preloader";
 
-const deleteIcon = require('../../../../common/delete.png');
+const deleteIcon = require('../../../../common/images/delete.png');
 
 type MessageType = {
     id: string

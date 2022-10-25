@@ -4,7 +4,7 @@ import Preloader from "../../../Common/Preloader/Preloader";
 import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileStatusHooks} from "./ProfileStatusHooks";
-import userAvatar from "../../../../common/userAvatar.png";
+import userAvatar from "../../../../common/images/userAvatar.png";
 import {Field} from "redux-form";
 
 type ProfileInfoType = {
