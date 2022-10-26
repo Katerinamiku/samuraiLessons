@@ -1,11 +1,12 @@
 import React from 'react';
 import preloader from '../../../common/images/pawsPreloader.gif';
+import s from './Preloader.module.scss';
 
 const Preloader = () => {
     return (
-        <div>
+        <span className={s.preloader}>
             <img src={preloader}/>
-        </div>
+        </span>
     );
 };
 

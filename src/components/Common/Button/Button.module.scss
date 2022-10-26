@@ -53,7 +53,10 @@
     transition: 0.2s;
   }
   &:hover:after {
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
+}
+.unfollow {
+  background-color: #f5dec4;
 }

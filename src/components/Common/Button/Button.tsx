@@ -13,7 +13,8 @@ export const Button = (props: ButtonPropsType) => {
         props.callBack()
     }
     const btnSize = props.size === 'large' ? s.btn : s.btnSmall;
+    const unfollowClass = props.name === 'Unfollow' ? s.unfollow : '';
     return (
-            <button className={btnSize} onClick={onClickButtonHandler} disabled={props.disabled}>{props.name}</button>
+            <button className={` ${btnSize} ${unfollowClass}`} onClick={onClickButtonHandler} disabled={props.disabled}>{props.name}</button>
     )
 }
