@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Redux/reduxStore";
-import {UsersType} from "../../Redux/reducers/UsersReducer";
+import { UsersType} from "../../Redux/reducers/UsersReducer";
 import Friends from "./Friends";
-import {getFriends} from "../../Redux/reducers/FriendsReducer";
+import {follow, getFriends, unfollow} from "../../Redux/reducers/FriendsReducer";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
-import {getCurrentPage, getPageSize} from "../../Redux/reducers/usersSelectors";
+import {getFollowingInProgress} from "../../Redux/reducers/usersSelectors";
 
 //----------------------ClassCompContainer------------------------------
 class FriendsContainer extends React.Component<FriendsPropsType> {
@@ -25,7 +25,11 @@ class FriendsContainer extends React.Component<FriendsPropsType> {
                      totalFriendsCount={this.props.totalFriendsCount}
                      pageSize={this.props.pageSize}
                      currentPage={this.props.currentPage}
-                     onPageChanged={this.onPageChanged}/>
+                     onPageChanged={this.onPageChanged}
+                     follow={this.props.follow}
+                     unfollow={this.props.unfollow}
+                     followingInProgress={this.props.followingInProgress}
+            />
         </>
     }
 }
@@ -39,9 +43,12 @@ type MapStateToPropsType = {
     pageSize: number
     totalFriendsCount: number
     currentPage: number
+    followingInProgress: number[]
 }
 type DispatchToPropsType = {
     getFriends: (currentPage: number, pageSize: number) => void
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
 
 const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
@@ -50,9 +57,10 @@ const mapStateToProps = (state: RootStateType): MapStateToPropsType => {
         pageSize: state.friends.pageSize,
         totalFriendsCount: state.friends.totalFriendsCount,
         currentPage: state.friends.currentPage,
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getFriends}),
+    connect(mapStateToProps, {follow, unfollow, getFriends}),
     withAuthRedirect)(FriendsContainer);

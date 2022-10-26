@@ -47,6 +47,9 @@
     align-items: flex-start;
     margin-left: 40px;
     @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textColor);
+    span {
+      @include text($titleFontFamily, 24px, 400, 1.5rem, $textColor);
+    }
 
     .contacts {
       display: flex;

@@ -41,12 +41,13 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                 </div>
             </div>
             <div className={s.profileInfo}>
-                <div>About me: {props.profile.aboutMe && `${props.profile.aboutMe}`} </div>
+                <div className={s.profileMainText}>About me:
+                    <span> {props.profile.aboutMe && `${props.profile.aboutMe}`} </span>
+                    </div>
                 <div>Looking for a
                     job:
-                    <div>{props.profile.lookingForAJobDescription && `${props.profile
-                        .lookingForAJobDescription}`}</div>
-
+                    <span> {props.profile.lookingForAJobDescription && `${props.profile
+                        .lookingForAJobDescription}`}</span>
                     </div>
                 <div>Contact me:
                     <ul className={s.contacts}>

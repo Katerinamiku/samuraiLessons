@@ -3,7 +3,7 @@
 
 .friendsTitle {
   text-align: center;
-  margin: 10px;
+  margin: 10px 10px 0;
   @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
 }
 
@@ -16,6 +16,7 @@
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 4px 7px 12px -3px #0b0000;
+  z-index: 1;
 
   .friendsList {
     display: flex;
@@ -29,10 +30,15 @@
       margin: 10px;
       width: 300px;
 
-      img {
-        width: 80px;
-        border-radius: 50%;
-        margin: 10px;
+      .avaBtn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        img {
+          width: 80px;
+          border-radius: 50%;
+          margin: 10px 10px 0;
+        }
       }
 
       .friendDescription {
