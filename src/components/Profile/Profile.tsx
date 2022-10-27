@@ -8,6 +8,8 @@ export type UserProfileInfoType = {
     profile: UserProfileType | null
     status: string
     updateStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (photoFile: File) => void
 }
 
 export const Profile = (props: UserProfileInfoType) => {
@@ -16,8 +18,10 @@ export const Profile = (props: UserProfileInfoType) => {
         <div className={s.profileContainer}>
             <ProfileInfo profile={props.profile}
                          status={props.status}
-                         updateStatus={props.updateStatus}/>
-            <MyPostsContainer />
+                         updateStatus={props.updateStatus}
+                         isOwner={props.isOwner}
+                         savePhoto={props.savePhoto}/>
+            <MyPostsContainer/>
         </div>
     );
 
