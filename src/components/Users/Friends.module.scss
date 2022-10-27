@@ -5,6 +5,9 @@
   text-align: center;
   margin: 10px 10px 0;
   @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
+  .sadcat {
+    width: 100px;
+  }
 }
 
 .friendsBlock {

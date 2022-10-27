@@ -1,5 +1,6 @@
 import React from 'react';
 import userAvatar from "../../common/images/userAvatar.png";
+import sadcat from "../../common/images/sadcat.gif";
 import {UsersType} from "../../Redux/reducers/FriendsReducer";
 import s from "./Friends.module.scss";
 import {Pagination} from "../Common/Pagination/Pagination";
@@ -21,7 +22,9 @@ type FriendPropsType = {
 const Friends = (props: FriendPropsType) => {
 
     if (!props.friends.length) {
-        return <div className={s.friendsTitle}>Friends not found</div>
+        return <div className={s.friendsTitle}>You have no cat-friends yet
+       <div><img src={sadcat} alt={'no friends'} className={s.sadcat}/></div>
+        </div>
     }
     return (
         <div className={s.friendsBlock}>
