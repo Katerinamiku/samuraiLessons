@@ -28,6 +28,12 @@
     top: 0px;
     left: 0px;
   }
+  @media screen and (max-width: 645px) {
+    @include text($mainFontFamily, 18px, 700, 1rem, $textSecondaryColor);
+  }
+  @media screen and (max-width: 445px) {
+    @include text($mainFontFamily, 16px, 700, 0.8rem, $textSecondaryColor);
+  }
 }
 .btnSmall {
   margin: 7px;

@@ -32,15 +32,17 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         }
     }
     if (!props.profile) {
-         return <Preloader/>
+        return <Preloader/>
     } else {
         return (
             <div className={s.profileInfoContainer}>
                 <div className={s.descriptionBlock}>
-                    <div><img  className={s.avatar} src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar} alt={'user avatar'}/>
+                    <div><img className={s.avatar}
+                              src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar}
+                              alt={'user avatar'}/>
                         {props.isOwner &&
                             <label htmlFor={"fileUpload"}>
-                               <img src={photoIcon} alt={'avatar icon'} className={s.photoIcon}/>
+                                <img src={photoIcon} alt={'avatar icon'} className={s.photoIcon}/>
                                 <input id={'fileUpload'} type={'file'} onChange={changePhoto}/>
                             </label>
                         }
@@ -51,7 +53,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                         {/*<ProfileStatus status={props.status}*/}
                         {/*               updateStatus={props.updateStatus}/>*/}
                         <ProfileStatusHooks status={props.status}
-                                            updateStatus={props.updateStatus}/>
+                                                 updateStatus={props.updateStatus}/>
                     </div>
                 </div>
                 <div className={s.profileInfo}>

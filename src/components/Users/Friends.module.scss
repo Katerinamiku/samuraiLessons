@@ -1,15 +1,6 @@
 @import "src/common/Styles/Sass/mixins";
 @import "src/common/Styles/Sass/variables";
 
-.friendsTitle {
-  text-align: center;
-  margin: 10px 10px 0;
-  @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
-  .sadcat {
-    width: 100px;
-  }
-}
-
 .friendsBlock {
   display: flex;
   background-color: $bgPrimaryColor;
@@ -20,6 +11,20 @@
   box-sizing: border-box;
   box-shadow: 4px 7px 12px -3px #0b0000;
   z-index: 1;
+  @media screen and (max-width: 922px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 490px) {
+    width: 250px;
+  }
+  .friendsTitle {
+    text-align: center;
+    margin: 10px 10px 0;
+    @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
+    .sadcat {
+      width: 100px;
+    }
+  }
 
   .friendsList {
     display: flex;
@@ -49,10 +54,16 @@
           margin-bottom: 5px;
           margin-top: 25px;
           @include text($mainFontFamily, 22px, 700, 1.5rem, $textColor);
+          @media screen and (max-width: 490px) {
+            @include text($mainFontFamily, 18px, 700, 1.5rem, $textColor);
+          }
         }
 
         .status {
           @include text($titleFontFamily, 22px, 700, 1rem, $textColor);
+          @media screen and (max-width: 490px) {
+            @include text($titleFontFamily, 18px, 700, 1rem, $textColor);
+          }
         }
       }
     }

@@ -4,15 +4,30 @@
 .nav {
   display: flex;
   flex-direction: column;
-  width: 140px;
+  min-width: 140px;
+  @media screen and (max-width: 922px) {
+    flex-direction: row;
+    margin: 20px 10px 0 20px;
+    justify-content: center;
+  }
 
   .navBlock {
     margin: 40px;
     margin-left: 30px;
 
+    @media screen and (max-width: 922px) {
+      display: flex;
+      justify-content: space-between;
+      width: 400px;
+      margin: 3px;
+    }
+
     .item a {
       @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
       text-decoration: none;
+      @media screen and (max-width: 645px) {
+        @include text($mainFontFamily, 24px, 700, 2rem, $textColor);
+      }
     }
 
     a.active {
