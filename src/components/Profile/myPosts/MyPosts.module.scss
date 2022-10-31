@@ -4,17 +4,22 @@
 
 .postsBlock {
   margin-left: 40px;
-
+  @media screen and (max-width: 645px) {
+    text-align: center;
+    margin-left: 5px;
+  }
   .title {
     margin-bottom: 20px;
     @include text($mainFontFamily, 36px, 700, 2rem, $textColor);
+    @media screen and (max-width: 645px) {
+      @include text($mainFontFamily, 30px, 700, 2rem, $textColor);
+    }
   }
 
   .post {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-
   }
 
   .postInput {

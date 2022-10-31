@@ -2,12 +2,12 @@
 @import "src/common/Styles/Sass/variables";
 
 .header {
-  min-width: 100%;
   height: 110px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
   .logo {
     width: 110px;
     border: solid white 2px;
@@ -18,30 +18,39 @@
 
     @media screen and (max-width: 645px) {
       width: 80px;
+      margin-right: 10px;
     }
   }
   .greeting {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 50px;
+    margin-left: 20px;
+    text-align: center;
     @include text($titleFontFamily, 32px, 700, 1.5rem, $textColor);
-
-    img {
-      width: 50px;
-    }
     @media screen and (max-width: 850px) {
       margin-left: 50px;
+      @include text($titleFontFamily, 21px, 700, 1.5rem, $textColor);
+    }
+    @media screen and (max-width: 548px) {
+      margin-left: 10px;
     }
   }
 
   .loginBlock {
-    margin-right: 30px;
+    margin-right: 20px;
+    display:flex;
     margin-left: 50px;
+    @media screen and (max-width: 548px) {
+      margin-left: 20px;
+      flex-direction: row;
+    }
   }
 
   .loginName {
+    text-align: center;
     @include text($titleFontFamily, 22px, 700, 1rem, $textColor);
+    @media screen and (max-width: 548px) {
+      @include text($titleFontFamily, 18px, 700, 1rem, $textColor);
+    }
   }
 }
 

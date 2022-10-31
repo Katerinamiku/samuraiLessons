@@ -18,6 +18,10 @@
   position: relative;
   z-index: 1;
   margin-bottom: 30px;
+  @media screen and (max-width: 645px) {
+    width: 350px;
+    height: 350px;
+  }
 
   .descriptionBlock {
     display: flex;
@@ -34,7 +38,7 @@
       }
     }
 
-    input {
+    input[type=file] {
       display: none;
     }
 
@@ -50,9 +54,15 @@
     .status {
       @include text($titleFontFamily, 26px, 400, 2rem, $textColor);
       padding-left: 20px;
+      @media screen and (max-width: 645px) {
+        @include text($titleFontFamily, 21px, 400, 2rem, $textColor);
+      }
 
       .profileName {
         @include text($mainFontFamily, 30px, 700, 2rem, $textColor);
+        @media screen and (max-width: 645px) {
+          @include text($mainFontFamily, 26px, 700, 2rem, $textColor);
+        }
       }
     }
   }
@@ -64,9 +74,15 @@
     align-items: flex-start;
     margin-left: 40px;
     @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textColor);
-
+    @media screen and (max-width: 645px) {
+      @include text($regularTextFontFamily, 14px, 400, 1.5rem, $textColor);
+      margin-left: 20px;
+    }
     span {
       @include text($titleFontFamily, 24px, 400, 1.5rem, $textColor);
+      @media screen and (max-width: 645px) {
+        @include text($titleFontFamily, 21px, 400, 1.5rem, $textColor);
+      }
     }
 
     .contacts {

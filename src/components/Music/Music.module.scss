@@ -14,4 +14,10 @@
   .musicTitle {
     @include text($mainFontFamily, 28px, 700, 2rem, $textColor);
   }
+  @media screen and (max-width: 922px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 490px) {
+    width: 250px;
+  }
 }

@@ -3,6 +3,10 @@
 
 .dialogs {
   display: flex;
+  flex-wrap: wrap;
+  @media screen and (max-width: 782px) {
+    justify-content: center;
+  }
 
   .friendsBlock {
     display: flex;
@@ -15,7 +19,18 @@
     border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 4px 7px 12px -3px #0b0000;
-
+    @media screen and (max-width: 782px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 370px;
+      height: 170px;
+      margin-right: 5px;
+      margin-bottom: 20px;
+    }
+    @media screen and (max-width: 447px) {
+      width: 230px;
+      height: 270px;
+    }
     .dialogFriends {
       display: flex;
       flex-direction: row;
@@ -27,7 +42,9 @@
         text-decoration: none;
         border: none;
         @include text($mainFontFamily, 21px, 700, 1.5rem, $textColor);
-
+        @media screen and (max-width: 447px) {
+          @include text($mainFontFamily, 18px, 700, 1.5rem, $textColor);
+        }
         &:active {
           color: #57bbb2;
         }
@@ -45,6 +62,12 @@
   .messageBlock {
     display: flex;
     flex-direction: column;
+    @media screen and (max-width: 782px) {
+      width: 370px;
+      margin-right: 5px;
+      margin-bottom: 20px;
+      align-items: center;
+    }
 
     .messages {
       width: 450px;
@@ -57,7 +80,13 @@
       padding: 15px;
       padding-bottom: 30px;
       margin-bottom: 20px;
-
+      @media screen and (max-width: 782px) {
+        width: 350px;
+        height: 250px;
+      }
+      @media screen and (max-width: 447px) {
+        width: 270px;
+      }
       .message {
         @include text($regularTextFontFamily, 16px, 400, 1.5rem, $textSecondaryColor);
         background-color: #f5f0ee;
@@ -76,6 +105,7 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+
         textarea {
           border: 1px solid $textSecondaryColor;
           border-radius: 8px;
@@ -83,6 +113,9 @@
           padding: 5px;
           margin-right: 10px;
           @include text($regularTextFontFamily, 14px, 400, 1.2rem, $textSecondaryColor);
+          @media screen and (max-width: 782px) {
+            width: 150px;
+          }
         }
       }
     }
