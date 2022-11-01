@@ -2,21 +2,23 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import style from './Login.module.scss';
 import {requiredField} from "../../utilites/validators";
-import s from './../Common/FormsControls/TextAreaCommon.module.css';
+import s from '../Common/FormsControls/FormsControls.module.scss';
 import {Button} from "../Common/Button/Button";
+import {createField, InputCommon} from "../Common/FormsControls/TextAreaCommon";
 
 export type FormDataType = {
     email: string | null
     password: string | null
     rememberMe: boolean
+    captcha: string
 }
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
+const LoginForm = ({handleSubmit, error, captchaUrl}: InjectedFormProps<FormDataType, {captchaUrl:string | null}> & {captchaUrl:string | null}) => {
     return (
         <div className={style.formStyle}>
-            <form onSubmit={props.handleSubmit}>
-                {props.error && <div className={s.formGroupError}>
-                    {props.error}
+            <form onSubmit={handleSubmit}>
+                {error && <div className={s.formGroupError}>
+                    {error}
                 </div>}
                 <div>
                     <Field placeholder={'Email'}
@@ -40,12 +42,18 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
                     <Button name={'Log in'} callBack={()=>{
                         }}  size={'large'}/>
                 </div>
+                {captchaUrl && <div className={style.captchaImg}>
+                    <img src={captchaUrl} alt={'captcha'}/>
+                </div>}
+                {captchaUrl && <div className={style.captchaField}>
+                    {createField('Symbols from image', 'captcha', [requiredField], InputCommon, {})}
+                </div>}
             </form>
         </div>
     );
 };
 
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'Login'})(LoginForm)
+const LoginReduxForm = reduxForm<FormDataType, {captchaUrl:string | null}>({form: 'login'})(LoginForm);
 
 export default LoginReduxForm;

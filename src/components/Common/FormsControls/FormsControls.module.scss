@@ -1,0 +1,21 @@
+@import "../../../common/Styles/Sass/mixins";
+@import "../../../common/Styles/Sass/variables";
+
+.formControl {
+    border: 1px solid black;
+}
+.error {
+    border: 2px solid red;
+}
+
+.errorText {
+    color: red;
+}
+.formGroupError {
+    border: 1px solid red;
+    padding: 3px;
+    color: #820b0b;
+    width: 150px;
+    margin: 5px;
+    @include text($regularTextFontFamily, 12px, 400, 1rem, #b81212);
+}

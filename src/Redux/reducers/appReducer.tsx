@@ -35,6 +35,7 @@ export const setInitializedAC = () => {
 //         } )
 //     }
 // }
+
 export const initializeAppTC = (): AppThunkType => async (dispatch) => {
     await dispatch(getAuthUserData())
     dispatch(setInitializedAC())

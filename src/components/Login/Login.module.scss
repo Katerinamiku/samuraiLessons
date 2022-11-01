@@ -39,8 +39,20 @@
 
     input {
       margin: 4px;
-
       @include text($regularTextFontFamily, 14px, 400, 1.2rem, $textSecondaryColor);
+    }
+
+    .captchaImg {
+      img {
+        width: 130px;
+        height: 50px;
+      }
+    }
+    .captchaField {
+      input {
+        width: 150px;
+      }
+
     }
   }
 }

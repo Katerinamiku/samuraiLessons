@@ -26,12 +26,12 @@ const Login = (props: LoginCommonPropsType) => {
                            target={'_blank'} rel="noreferrer"> here
                         </a>
                     </div>
-                     <div>or use common test account credentials:
-                    <br/>Email: free@samuraijs.com
-                    Password: free</div>
+                     <div>or use test account data:
+                    <br/><b>Email:</b> free@samuraijs.com
+                    <b> Password:</b> free</div>
                 </div>
             </div>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl}/>
         </div>
     );
 };
@@ -39,6 +39,7 @@ const Login = (props: LoginCommonPropsType) => {
 type mapStateToPropsType = {
     formData: any
     isAuth: boolean
+    captchaUrl: string | null
 }
 type dispatchType = {
     setLogin: (formData: FormDataType) => void
@@ -47,7 +48,8 @@ type dispatchType = {
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     return {
         formData: state.form,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        captchaUrl: state.auth.captchaUrl
     }
 }
 

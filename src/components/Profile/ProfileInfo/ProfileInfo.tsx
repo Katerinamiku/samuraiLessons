@@ -1,12 +1,16 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.scss'
-import Preloader from "../../../Common/Preloader/Preloader";
-import {UserProfileType} from "../../../../Redux/reducers/ProfilePageReducer";
+import Preloader from "../../Common/Preloader/Preloader";
+import {UserProfileType} from "../../../Redux/reducers/ProfilePageReducer";
 import ProfileStatus from "./ProfileStatus";
 import {ProfileStatusHooks} from "./ProfileStatusHooks";
-import userAvatar from "../../../../common/images/userAvatar.png";
+import userAvatar from "../../../common/images/userAvatar.png";
+import ProfileData from "./ProfileData";
+import ProfileDataForm from "./ProfileDataForm";
 
-const photoIcon = require('../../../../common/images/profile.png');
+
+
+const photoIcon = require('../../../common/images/profile.png');
 
 type ProfileInfoType = {
     profile: UserProfileType | null
@@ -14,18 +18,20 @@ type ProfileInfoType = {
     updateStatus: (status: string) => void
     isOwner: boolean
     savePhoto: (photoFile: File) => void
+    saveProfileData: (formData: UserProfileType) => Promise<any>
 }
 
 export const ProfileInfo = (props: ProfileInfoType) => {
 
-    // let inputs = props.profile.contacts && Object.keys(props.profile.contacts).map((key) => {
-    //     return <div key={key}>
-    //         <label>
-    //             <Field type="input" component={'input'} name={'contacts.' + key} key={key}/>
-    //             {key}
-    //         </label>
-    //     </div>
-    // })
+    const [editMode, setEditMode] = useState(false)
+
+    //закрывает этидмод когда вернется результат, если будет ошибка - не закроет эдит
+    const submitProfileData = (formData: UserProfileType) => {
+    props.saveProfileData(formData)
+        .then(()=>{
+           setEditMode(false)
+       });
+    }
     const changePhoto = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {
             props.savePhoto(e.target.files[0])
@@ -35,7 +41,7 @@ export const ProfileInfo = (props: ProfileInfoType) => {
         return <Preloader/>
     } else {
         return (
-            <div className={s.profileInfoContainer}>
+            <div className={editMode ? `${s.editModeBG} ${s.profileInfoContainer}` : s.profileInfoContainer}>
                 <div className={s.descriptionBlock}>
                     <div><img className={s.avatar}
                               src={props.profile.photos.large != null ? props.profile.photos.large : userAvatar}
@@ -53,30 +59,25 @@ export const ProfileInfo = (props: ProfileInfoType) => {
                         {/*<ProfileStatus status={props.status}*/}
                         {/*               updateStatus={props.updateStatus}/>*/}
                         <ProfileStatusHooks status={props.status}
-                                                 updateStatus={props.updateStatus}/>
+                                            updateStatus={props.updateStatus}/>
                     </div>
                 </div>
                 <div className={s.profileInfo}>
-                    <div className={s.profileMainText}>About me:
-                        <span> {props.profile.aboutMe && `${props.profile.aboutMe}`} </span>
-                    </div>
-                    <div>Looking for a
-                        job:
-                        <span> {props.profile.lookingForAJobDescription && `${props.profile
-                            .lookingForAJobDescription}`}</span>
-                    </div>
-                    <div>Contact me:
-                        <ul className={s.contacts}>
-                            <li>{props.profile.contacts.github} Github</li>
-                            <li>{props.profile.contacts.facebook}Facebook</li>
-                            <li>{props.profile.contacts.mainLink}Email</li>
-
-                            {/*{props.profile.contacts && `${Object.keys(props.profile.contacts)}`}*/}
-                            {/*{inputs}*/}
-                        </ul>
-                    </div>
+                    {editMode
+                        ? <div>
+                            <ProfileDataForm initialValues={props.profile} onSubmit={submitProfileData}/>
+                        </div>
+                        : <ProfileData profile={props.profile}
+                                       isOwner={props.isOwner}
+                                       editModeOn={() => setEditMode(true)}/>
+                    }
                 </div>
             </div>
         );
     }
 }
+
+
+
+
+

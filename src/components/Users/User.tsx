@@ -38,7 +38,6 @@ export const User = (props: UsersAPIPropsType) => {
                         <div className={s.name}>{props.user.name}</div>
                         <div className={s.status}>{props.user.status}</div>
                         <div className={s.location}>
-                            <div>{'country, city'}</div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {profileAPI, usersAPI} from "../../API/api";
 import {AppThunkType} from "../reduxStore";
+import {stopSubmit} from "redux-form";
 
 //------------Types-------------
 export type ProfilePageActionsTypes =
@@ -9,7 +10,7 @@ export type ProfilePageActionsTypes =
     | ReturnType<typeof setStatus>
     | ReturnType<typeof savePhotoSuccess>
 
-type ContactsType = {
+export type ContactsType = {
     facebook: string | null
     github: string | null
     instagram: string | null
@@ -113,6 +114,12 @@ export const savePhotoSuccess = (photos: UserPhotosType) => {
         photos
     } as const
 }
+// export const savePhrofileData = (profile: UserProfileType) => {
+//     return {
+//         type: "SAVE_PHOTO_SUCCESS",
+//         photos
+//     } as const
+// }
 //---------Thunk--------------
 export const getUserProfileInfo = (id: number): AppThunkType => {
     return (dispatch) => {
@@ -148,5 +155,18 @@ export const savePhoto = (photoFile: File): AppThunkType => {
                     dispatch(savePhotoSuccess(response.data.data.photos))
                 }
             });
+    }
+}
+export const saveProfileData = (formData: UserProfileType): AppThunkType => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.id || 'unknown';
+        let response = await profileAPI.uploadProfileData(formData);
+                if (response.data.resultCode === 0) {
+                    dispatch(getUserProfileInfo(+userId))
+                } else {
+                    let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+                    dispatch(stopSubmit('editProfile', {_error: message}));
+                    return Promise.reject();
+                }
     }
 }

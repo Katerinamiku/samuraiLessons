@@ -1,5 +1,6 @@
 import axios from "axios";
 import {FormDataType} from "../components/Login/LoginForm";
+import {UserProfileType} from "../Redux/reducers/ProfilePageReducer";
 
 //с помощью этого можно поместить настройки по работе с опр апи чтобы не дублировать код
 const instance = axios.create({
@@ -51,6 +52,9 @@ export const profileAPI = {
                 'Content-Type': 'multipart/form-data'
             }
         })
+    },
+    uploadProfileData(formData: UserProfileType) {
+        return instance.put(`profile/`, formData)
     }
 }
 
@@ -59,10 +63,15 @@ export const authAPI = {
         return instance.get(`auth/me`);
     },
     setLoginData(formData: FormDataType) {
-        return instance.post(`/auth/login`, {email: formData.email, password: formData.password, rememberMe: formData.rememberMe});
+        return instance.post(`/auth/login`, {email: formData.email, password: formData.password, rememberMe: formData.rememberMe, captcha: formData.captcha});
     },
     setLogout() {
         return instance.delete(`/auth/login`);
     }
 }
 
+export const securityAPI = {
+    getCaptcha() {
+        return instance.get(`security/get-captcha-url`);
+    }
+}
