@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/samuraiLessons/static/css/main.b62f70ff.css",
-    "main.js": "/samuraiLessons/static/js/main.bd23d8ce.js",
+    "main.css": "/samuraiLessons/static/css/main.9d86b014.css",
+    "main.js": "/samuraiLessons/static/js/main.c08eca2a.js",
     "static/css/63.56af3ed1.chunk.css": "/samuraiLessons/static/css/63.56af3ed1.chunk.css",
     "static/js/63.17571d21.chunk.js": "/samuraiLessons/static/js/63.17571d21.chunk.js",
     "static/css/908.a77cfb83.chunk.css": "/samuraiLessons/static/css/908.a77cfb83.chunk.css",
@@ -19,8 +19,8 @@
     "static/media/save.png": "/samuraiLessons/static/media/save.d99798039e53162d4e3d.png",
     "static/media/sadcat.gif": "/samuraiLessons/static/media/sadcat.421ae346c04a94d8e13f.gif",
     "index.html": "/samuraiLessons/index.html",
-    "main.b62f70ff.css.map": "/samuraiLessons/static/css/main.b62f70ff.css.map",
-    "main.bd23d8ce.js.map": "/samuraiLessons/static/js/main.bd23d8ce.js.map",
+    "main.9d86b014.css.map": "/samuraiLessons/static/css/main.9d86b014.css.map",
+    "main.c08eca2a.js.map": "/samuraiLessons/static/js/main.c08eca2a.js.map",
     "63.56af3ed1.chunk.css.map": "/samuraiLessons/static/css/63.56af3ed1.chunk.css.map",
     "63.17571d21.chunk.js.map": "/samuraiLessons/static/js/63.17571d21.chunk.js.map",
     "908.a77cfb83.chunk.css.map": "/samuraiLessons/static/css/908.a77cfb83.chunk.css.map",
@@ -29,7 +29,7 @@
     "147.4a8411a1.chunk.js.map": "/samuraiLessons/static/js/147.4a8411a1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b62f70ff.css",
-    "static/js/main.bd23d8ce.js"
+    "static/css/main.9d86b014.css",
+    "static/js/main.c08eca2a.js"
   ]
 }
