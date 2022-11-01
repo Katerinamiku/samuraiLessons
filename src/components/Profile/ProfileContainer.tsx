@@ -5,12 +5,13 @@ import {connect} from "react-redux";
 import {
     getStatus,
     getUserProfileInfo,
-    savePhoto,
+    savePhoto, saveProfileData,
     updateStatus,
     UserProfileType
 } from "../../Redux/reducers/ProfilePageReducer";
-import {withRouter, RouteComponentProps} from "react-router-dom";
+import {withRouter, RouteComponentProps, Redirect} from "react-router-dom";
 import {compose} from "redux";
+
 
 type commonTypes = RouteComponentProps<withRouteType> & ProfilePageType;
 export type ProfilePageType = mapStateToPropsType & dispatchType;
@@ -40,13 +41,16 @@ class ProfileContainer extends React.Component<commonTypes> {
 
     render() {
         return (
-                <Profile {...this.props}
-                         profile={this.props.profile}
-                         status={this.props.status}
-                         updateStatus={this.props.updateStatus}
-                         isOwner={!this.props.match.params.userId}
-                         savePhoto={this.props.savePhoto}
-                />
+            this.props.isAuth
+                    ?  <Profile {...this.props}
+                                profile={this.props.profile}
+                                status={this.props.status}
+                                updateStatus={this.props.updateStatus}
+                                isOwner={!this.props.match.params.userId}
+                                savePhoto={this.props.savePhoto}
+                                saveProfileData={this.props.saveProfileData}
+                    />
+                    : <Redirect to={'/login'}/>
         )
     }
 }
@@ -71,6 +75,7 @@ type dispatchType = {
     getStatus: (id: number) => void
     updateStatus: (status: string) => void
     savePhoto: (photoFile: File) => void
+    saveProfileData: (formData: UserProfileType) => Promise<any>
 }
 
 const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
@@ -82,7 +87,7 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
     }
 }
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfileInfo, getStatus, updateStatus, savePhoto}),
+    connect(mapStateToProps, {getUserProfileInfo, getStatus, updateStatus, savePhoto, saveProfileData}),
     withRouter)
 (ProfileContainer)
 

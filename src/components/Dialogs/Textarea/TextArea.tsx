@@ -1,7 +1,7 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {NewMessageFormPropsType} from "../Dialogs";
-import {TextareaCommon} from "../../Common/FormsControls/TextareaCommon";
+import {TextAreaCommon} from "../../Common/FormsControls/TextAreaCommon";
 import {maxLengthCreator, requiredField} from "../../../utilites/validators";
 import {Button} from "../../Common/Button/Button";
 import s from '../Dialogs.module.scss';
@@ -12,7 +12,7 @@ const TextArea: React.FC<InjectedFormProps<NewMessageFormPropsType>> = (props) =
         <div >
             <form onSubmit={props.handleSubmit} className={s.messageForm}>
                 <div>
-                    <Field component={TextareaCommon}
+                    <Field component={TextAreaCommon}
                            name={'newMessageBody'}
                            placeholder={'Enter your message'}
                            validate={[requiredField, max30]}/>

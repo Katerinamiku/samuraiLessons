@@ -4,7 +4,7 @@ import {Post} from './Post/Post'
 import {PostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../../utilites/validators";
-import {TextareaCommon} from "../../Common/FormsControls/TextareaCommon";
+import {TextAreaCommon} from "../../Common/FormsControls/TextAreaCommon";
 import {Button} from "../../Common/Button/Button";
 import {UserProfileType} from "../../../Redux/reducers/ProfilePageReducer";
 
@@ -14,7 +14,6 @@ export type NewPostFormPropsType = {
 }
 
 export const MyPosts = React.memo(function (props: PostsPropsType) {
-    console.log('render')
     let postsElements = props.posts.map(p => <Post key={p.id} id={p.id} message={p.message} likes={p.likes} profile={props.profile}/>)
 
     let addPostHandler = (formData: NewPostFormPropsType) => {
@@ -44,7 +43,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<NewPostFormPropsType>> = (props
             <form onSubmit={props.handleSubmit}>
                 <div>
                     <Field name={'NewPostText'}
-                           component={TextareaCommon}
+                           component={TextAreaCommon}
                            placeholder={'Meow something'}
                            validate={[requiredField, max30]}/>
                 </div>
