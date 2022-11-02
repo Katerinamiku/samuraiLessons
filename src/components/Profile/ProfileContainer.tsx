@@ -11,9 +11,10 @@ import {
 } from "../../Redux/reducers/ProfilePageReducer";
 import {withRouter, RouteComponentProps, Redirect} from "react-router-dom";
 import {compose} from "redux";
-
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 type commonTypes = RouteComponentProps<withRouteType> & ProfilePageType;
+
 export type ProfilePageType = mapStateToPropsType & dispatchType;
 
 //-------------------ClassCompContainer-------------------------
@@ -67,7 +68,7 @@ type withRouteType = {
 type mapStateToPropsType = {
     profile: UserProfileType | null
     status: string
-    authorizedUserId: string
+    authorizedUserId: string | null
     isAuth: boolean
 }
 type dispatchType = {
@@ -86,7 +87,7 @@ const mapStateToProps = (state: RootStateType): mapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
-export default compose<React.ComponentType>(
+export default compose<React.ComponentType>(withAuthRedirect,
     connect(mapStateToProps, {getUserProfileInfo, getStatus, updateStatus, savePhoto, saveProfileData}),
     withRouter)
 (ProfileContainer)

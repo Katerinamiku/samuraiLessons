@@ -23,10 +23,6 @@ export const usersAPI = {
     setUnfollow(id: number) {
         return instance.delete(`follow/${id}`)
     },
-    getUserProfileInfo(id: number) {
-        console.warn('Obsolete method. Please use profileAPI object')
-        return profileAPI.getUserProfileInfo(id)
-    },
     getFriends(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=true`).then(response => {
             return response.data
@@ -35,14 +31,14 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getUserProfileInfo(id: number) {
-        return instance.get(`profile/` + id)
+    getUserProfileInfo(userId: number) {
+        return instance.get(`profile/${userId}`)
     },
-    getStatus(id: number) {
-        return instance.get(`profile/status/` + id)
+    getStatus(userId: number) {
+        return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status/`, {status: status})
+        return instance.put(`profile/status/`, {status})
     },
     downloadPhoto(photoFile: File) {
         const formData = new FormData()
