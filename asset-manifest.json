@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/samuraiLessons/static/css/main.9d86b014.css",
-    "main.js": "/samuraiLessons/static/js/main.c08eca2a.js",
+    "main.css": "/samuraiLessons/static/css/main.f4c41983.css",
+    "main.js": "/samuraiLessons/static/js/main.d12ddb08.js",
     "static/css/63.56af3ed1.chunk.css": "/samuraiLessons/static/css/63.56af3ed1.chunk.css",
-    "static/js/63.17571d21.chunk.js": "/samuraiLessons/static/js/63.17571d21.chunk.js",
+    "static/js/63.058687e3.chunk.js": "/samuraiLessons/static/js/63.058687e3.chunk.js",
     "static/css/908.a77cfb83.chunk.css": "/samuraiLessons/static/css/908.a77cfb83.chunk.css",
     "static/js/908.c4a032a7.chunk.js": "/samuraiLessons/static/js/908.c4a032a7.chunk.js",
     "static/css/147.02798907.chunk.css": "/samuraiLessons/static/css/147.02798907.chunk.css",
-    "static/js/147.4a8411a1.chunk.js": "/samuraiLessons/static/js/147.4a8411a1.chunk.js",
+    "static/js/147.f15c161a.chunk.js": "/samuraiLessons/static/js/147.f15c161a.chunk.js",
     "static/media/bgCats.png": "/samuraiLessons/static/media/bgCats.43606cfd590f9bda253a.png",
     "static/media/logo.png": "/samuraiLessons/static/media/logo.7b31c33591081d78a57f.png",
+    "static/media/404error.png": "/samuraiLessons/static/media/404error.b5ada80253e070650da0.png",
     "static/media/profile.png": "/samuraiLessons/static/media/profile.9531ba3994866a6f1364.png",
     "static/media/bgLogin.png": "/samuraiLessons/static/media/bgLogin.2d7a558ba67e4014098a.png",
     "static/media/profileBg.png": "/samuraiLessons/static/media/profileBg.a13c04268fecbc3dad6c.png",
@@ -19,17 +20,17 @@
     "static/media/save.png": "/samuraiLessons/static/media/save.d99798039e53162d4e3d.png",
     "static/media/sadcat.gif": "/samuraiLessons/static/media/sadcat.421ae346c04a94d8e13f.gif",
     "index.html": "/samuraiLessons/index.html",
-    "main.9d86b014.css.map": "/samuraiLessons/static/css/main.9d86b014.css.map",
-    "main.c08eca2a.js.map": "/samuraiLessons/static/js/main.c08eca2a.js.map",
+    "main.f4c41983.css.map": "/samuraiLessons/static/css/main.f4c41983.css.map",
+    "main.d12ddb08.js.map": "/samuraiLessons/static/js/main.d12ddb08.js.map",
     "63.56af3ed1.chunk.css.map": "/samuraiLessons/static/css/63.56af3ed1.chunk.css.map",
-    "63.17571d21.chunk.js.map": "/samuraiLessons/static/js/63.17571d21.chunk.js.map",
+    "63.058687e3.chunk.js.map": "/samuraiLessons/static/js/63.058687e3.chunk.js.map",
     "908.a77cfb83.chunk.css.map": "/samuraiLessons/static/css/908.a77cfb83.chunk.css.map",
     "908.c4a032a7.chunk.js.map": "/samuraiLessons/static/js/908.c4a032a7.chunk.js.map",
     "147.02798907.chunk.css.map": "/samuraiLessons/static/css/147.02798907.chunk.css.map",
-    "147.4a8411a1.chunk.js.map": "/samuraiLessons/static/js/147.4a8411a1.chunk.js.map"
+    "147.f15c161a.chunk.js.map": "/samuraiLessons/static/js/147.f15c161a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d86b014.css",
-    "static/js/main.c08eca2a.js"
+    "static/css/main.f4c41983.css",
+    "static/js/main.d12ddb08.js"
   ]
 }
