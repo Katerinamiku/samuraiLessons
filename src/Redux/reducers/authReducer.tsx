@@ -1,11 +1,11 @@
-import {authAPI, securityAPI} from "../../API/api";
+ import {authAPI, securityAPI} from "../../API/api";
 import {FormDataType} from "../../components/Login/LoginForm";
 import {stopSubmit} from "redux-form";
 import {AppThunkType} from "../reduxStore";
 
 export type AuthActionsTypes = ReturnType<typeof setAuthUserData> | ReturnType<typeof detCaptchaUrlSuccess>
 export type AuthMeType = {
-    id: string,
+    id: string | null,
     login: string,
     email: string,
     isAuth: boolean

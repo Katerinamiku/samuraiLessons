@@ -121,7 +121,7 @@
         @include text($mainFontFamily, 24px, 800, 1.5rem, #dbd5d5);
         cursor: default;
         @media screen and (max-width: 645px) {
-          @include text($mainFontFamily, 18px, 800, 1.5rem, $textColor);
+          @include text($mainFontFamily, 18px, 800, 1.5rem, #dbd5d5);
         }
       }
       li {

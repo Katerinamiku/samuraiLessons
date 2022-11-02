@@ -1,0 +1,28 @@
+@import "src/common/Styles/Sass/mixins";
+@import "src/common/Styles/Sass/variables";
+
+.errorPage {
+  display: flex;
+  width: 702px;
+  height: 402px;
+  background-color: $bgPrimaryColor;
+  background-image: url('../../common/images/404error.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 4px 7px 12px -3px #0b0000;
+
+  @media screen and (max-width: 922px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 490px) {
+    width: 250px;
+  }
+}

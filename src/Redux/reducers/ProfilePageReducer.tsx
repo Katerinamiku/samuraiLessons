@@ -114,16 +114,11 @@ export const savePhotoSuccess = (photos: UserPhotosType) => {
         photos
     } as const
 }
-// export const savePhrofileData = (profile: UserProfileType) => {
-//     return {
-//         type: "SAVE_PHOTO_SUCCESS",
-//         photos
-//     } as const
-// }
+
 //---------Thunk--------------
 export const getUserProfileInfo = (id: number): AppThunkType => {
     return (dispatch) => {
-        usersAPI.getUserProfileInfo(id)
+        profileAPI.getUserProfileInfo(id)
             .then(response => {
                 dispatch(setUserProfile(response.data));
             });
@@ -144,7 +139,10 @@ export const updateStatus = (status: string): AppThunkType => {
                 if (response.data.resultCode === 0) {
                     dispatch(setStatus(status))
                 }
-            });
+            })
+            .catch((error) => {
+                console.warn('something went wrong with status')
+            })
     }
 }
 export const savePhoto = (photoFile: File): AppThunkType => {
